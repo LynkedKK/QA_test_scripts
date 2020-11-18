@@ -1,5 +1,6 @@
 import os,sys
 from pprint import pprint
+import time
 
 from selenium import webdriver
 
@@ -30,6 +31,10 @@ def test_ViewPort():
     sc_filename =get_sc_filename(SCREENCAPTURE_PATH,viewport_name)
 
     browser.set_window_size(width, height)
+
+    # sleep a while to let rendering ready
+    time.sleep(3)
+
     browser.save_screenshot(sc_filename)
 
     # assert('Google'==browser.title)
