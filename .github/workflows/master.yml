@@ -24,6 +24,8 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
+          pipenv sync
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/regression/report.html tests/UI_test/regression
 
@@ -54,6 +56,8 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
+          pipenv sync
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/new_feature/report.html tests/UI_test/new_feature
 
@@ -95,6 +99,8 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
+          pipenv sync
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/functional/report.html tests/UI_test/functional
 
