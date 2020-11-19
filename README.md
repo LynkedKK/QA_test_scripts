@@ -30,6 +30,15 @@ reports
 $ pipenv install --dev
 ```
 
+## progress
+  - https://docs.google.com/spreadsheets/d/1pVpmrZH03URWWLjfe9bZxA3nfnf4-qFKSklFdKFEB4o/edit#gid=0
+
+  - ### data sources
+  - ### manual test case example shared by danel dada
+
+    - https://docs.google.com/spreadsheets/d/18Wcn9MWp2byJXmWZHl3n03LQLLc1-ykaS3x5ogX8T08/edit?usp=sharing
+    - https://drive.google.com/drive/folders/16rzqmaSZPB4Lf90ud5Rtp7kY9haVs_Cb?usp=sharing
+
 ### test sites
 
   - http://menymeny.com/food/やきとり/?do_lineup

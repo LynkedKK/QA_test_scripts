@@ -26,7 +26,6 @@ sys.path.append(LIB_ASSERT_DIR)
 from lib_helloworld import lib_helloworld
 from po_helloworld import po_helloworld
 from assert_image import assertSameImage
-from viewports import *
 from jp import *
 
 SELENIUM_HUB_HOST='localhost'
