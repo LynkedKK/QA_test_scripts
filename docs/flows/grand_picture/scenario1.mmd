@@ -1,15 +1,22 @@
 sequenceDiagram
     participant User
     participant Restaurant
+
     Note left of User: scan qr code
+    Note right of Restaurant: line up manage
     Note left of User: queuing with <br/>the ticket number
     Note right of Restaurant: Restaurant will assign <br/> the table to the<br/> ticket number
-    Note left of User: after table assigned
 
+    Note left of User: after table assigned
+    Note left of User: go inside restaurant
     loop temp_name_order_sequence, should be appears randomly
       Note left of User: user can place order
       Note left of User: user can check order <br/> page & bill page
       Note right of Restaurant: receive order<br/> and change order status
     end
 
-    Note left of User: user finish meal and<br/> pay at the cashier
+    Note left of User: user finish meal
+    Note left of User: check bills
+    Note left of User: pay at the cashier
+    Note right of Restaurant: cashier, <br/>change bill state
+    Note left of User: leave
