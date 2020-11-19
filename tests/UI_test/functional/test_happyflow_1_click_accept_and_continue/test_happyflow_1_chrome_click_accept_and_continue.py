@@ -33,6 +33,8 @@ from jp import *
 SELENIUM_HUB_HOST='localhost'
 FOOD_PAGE='http://menymeny.com/food/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/'
 
+ACTUAL_SCREENSHOT='reports/UI_test/functional/test_happyflow_1_click_accept_and_continue/test_happyflow_1_chrome_first_time_landing_after_click_accept_iphonex.png'
+EXPECTED_SCREENSHOT='tests/UI_test/functional/test_happyflow_1_click_accept_and_continue/expected_result/test_happyflow_1_chrome_first_time_landing_after_click_accept_iphonex.png'
 
 def test_happyflow_1_chrome_click_accept_and_continue():
   selenium_url = 'http://{}:4444/wd/hub'.format(SELENIUM_HUB_HOST)
@@ -46,19 +48,17 @@ def test_happyflow_1_chrome_click_accept_and_continue():
     desired_capabilities = chrome_options.to_capabilities()
   )
 
-  URL = 'http://192.168.88.105:8002/'
-  browser.get(URL)
-  # browser.get(FOOD_PAGE)
+  # URL = 'http://192.168.88.105:8002/'
+  # browser.get(URL)
+  browser.get(FOOD_PAGE)
   sleep(1)
 
   fl_page = first_time_landing.MainPage(browser)
-  fl_page.checkLinkExist()
   fl_page.checkAcceptAndContinueButtonExist()
-  fl_page.takeScreenshot('/tmp/t1.png')
-  # browser.find_element_by_id('test_link')
-  # browser.find_element_by_xpath('//*[@id="test_link"]')
-
+  fl_page.takeScreenshot(ACTUAL_SCREENSHOT)
   # fl_page.checkLinkExist()
 
   browser.quit()
   sleep(30)
+
+  assertSameImage(EXPECTED_SCREENSHOT, ACTUAL_SCREENSHOT,0.1,  'first time landing test after clicking accept failed')
