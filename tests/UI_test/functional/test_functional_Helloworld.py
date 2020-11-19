@@ -24,7 +24,7 @@ from ele_helloworld import ele_helloworld
 from config_helloworld import config_helloworld
 from assert_helloworld import assert_helloworld
 
-def test_lib_directory():
+def debug_test_lib_directory():
   pprint(TEST_ROOT)
   # assert a % 2 == 0, "value was odd, should be even"
   assert 'lib_helloworld helloworld'==lib_helloworld()
@@ -36,5 +36,5 @@ def test_lib_directory():
   # pprint(TEST_ROOT)
   # pprint("helloworld_happyflow_1")
 
-def test_functional_Helloworld():
+def debug_test_functional_Helloworld():
   print("helloworld")
