@@ -95,13 +95,21 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/functional/report.html tests/UI_test/functional
 
           ls -l reports/functional/test_viewport
+          ls -l reports/UI_test/functional
 
       - name: action-upload-artifact-tryout
         uses: actions/upload-artifact@v2
         with:
           name: 'reports_functional'
           path: reports/functional
+
+      - name: action-upload-artifact-tryout
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'reports_UI_test_functional'
+          path: reports/UI_test/functional

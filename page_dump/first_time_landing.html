@@ -1,0 +1,1489 @@
+<html><head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<style>
+html,body,#root,#wrapper{height:100%}
+body{margin:0}
+ul{padding:0;margin:0;list-style:none;}
+ol{padding:0;margin:0;list-style:none;}
+li{display:block;}
+h4,p{margin:0;font-weight:normal;}
+.border_top_0 {
+	border-top:0
+}
+.border_top_1 {
+	border-top: 1px solid #E2E2E2;
+}
+.color_000000 {
+	color:#000000
+}
+.color_545454 {
+	color:#545454
+}
+.display_block {
+	display:block
+}
+.display_flex {
+	display:flex
+}
+.flex_1 {
+	flex:1
+}
+.flex_shrink_0 {
+	flex-shrink:0
+}
+.font_size_14 {
+	font-size:14px
+}
+.font_size_16 {
+	font-size:16px
+}
+.font_size_20 {
+	font-size:20px
+}
+.height_1 {
+	height:1px
+}
+.height_88 {
+	height:88px
+}
+.width_8 {
+	width:8px
+}
+.width_88 {
+	width:88px
+}
+.width_96 {
+	width:96px
+}
+.line_height_20 {
+	line-height:20px
+}
+.line_height_24 {
+	line-height:24px
+}
+.list_style_none {
+	list-style:none
+}
+.margin_0 {
+	margin:0
+}
+.margin_bottom_16 {
+	margin-bottom:16px
+}
+.object_fit_cover {
+	object-fit:cover
+}
+.opacity_1 {
+	opacity:1
+}
+.outline_rgba_1 {
+    outline: rgba(0, 0, 0, 0.03) solid 1px;
+}
+.outline_offset_minus1 {
+    outline-offset: -1px;
+}
+.overflow_hidden {
+	overflow:hidden
+}
+.padding_0 {
+	padding:0
+}
+.padding_16_0 {
+	padding:16px 0
+}
+.padding_0_16 {
+	padding:0 16px
+}
+.padding_top_4 {
+	padding-top:4px
+}
+.padding_top_8 {
+	padding-top:8px
+}
+.padding_top_24 {
+	padding-top:24px
+}
+.padding_bottom_24 {
+	padding-bottom:24px
+}
+.position_relative {
+	position:relative
+}
+.text_decoration_none {
+	text-decoration:none
+}
+.food-top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background-color: #fff;
+	justify-content: center;
+	align-items: center;
+	overflow: scroll;
+}
+.footer-container {
+	width: 100%;
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+	z-index: 1;
+}
+.footerButton {
+	margin: 10 auto;
+	width: 80%;
+	background-color: #BA1F23;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 18px;
+	padding: 5px 0;
+	display: flex;
+	justify-content: space-around;
+}
+
+.notification {
+	position: fixed;
+	left: 0;
+	right: 0;
+	margin: auto;
+	margin-top: 0;
+	width: 80%;
+	display: flex;
+	font-size: 20px;
+	justify-content: center;
+	align-items: center;
+	background-color: #8FBC8F;
+	color: #1b1c1b;
+	opacity:0.6;
+	z-index: 99;
+}
+.alert {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 10;
+	margin: auto;
+	width: 80%;
+	height: 20%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #BA1F23;
+	color: #FFFFCC;
+	z-index: 99;
+}
+.detail-amount-group {
+	padding: 24px 16px 0 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.svg-container-48-circle {
+	display: flex;
+	font-size: 18px;
+	line-height: 24px;
+	width: 48px;
+	height: 48px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	border-width: 2px;
+	border-color: #00f;
+	border-style: solid;
+	background: #fff;
+	border-radius: 50%;
+}
+
+.svg-container-24-circle {
+	display: flex;
+	font-size: 18px;
+	line-height: 12px;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	border-width: 2px;
+	border-color: #00f;
+	border-style: solid;
+	background: #fff;
+	border-radius: 50%;
+	margin: auto;
+}
+
+.svg-minus,
+.svg-plus {
+	fill: #00f;
+}
+.svg-minus svg,
+.svg-plus svg{
+	flex: none;
+}
+.svg-minus[enabled="false"] {
+	fill: #ccc;
+	border-color: #ccc;
+}
+.detail-amount {
+	font-size: 16px;
+	line-height: 24px;
+	color: #000000;
+	width: calc(1ch + 48px);
+	text-align: center;
+}
+.food-detail-img-container {
+	width: 100%;
+	height: 80vw;
+	background-position: center;
+	background-size: cover;
+}
+.cart-amount-div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.cart-button-base {
+	width: 30px;
+	height: 30px;
+	font-size: 16px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ccc;
+	background-color: #fff;
+}
+.cart-button-l {
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+.cart-button-l[enabled='false'] {
+	background-color: #eee;
+	color: #bbb;
+}
+
+.cart-button-r {
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.cart-span {
+	width: 48px;
+	height: 30px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 30px;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	box-sizing: border-box;
+}
+.cart-span-price {
+	font-size: 14px;
+	line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+	min-width: 20px;
+}
+.cart-button-delete {
+	font-size: 14px;
+	background-color: #fff;
+	box-sizing: border-box;
+	border-width: 0;
+	padding: 5px 0;
+	color: #f00;
+}
+.flex-c {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-r {
+	display: flex;
+	flex-direction: row;
+}
+* {
+	touch-action: manipulation;
+	outline: 0;
+}
+.container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	justify-content: space-around;
+	margin: 70px 0;
+}
+.order_container {
+	margin: 2%;
+	min-width: 96%;
+	padding: 5px;
+	border: 2px solid #00f;
+	position: relative;
+}
+.order-info {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+.time {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: #000;
+	color: #0f0;
+	font-size: 16px;
+}
+.price {
+	margin-top: 10px;
+}
+.order-list {
+	box-sizing: border-box;
+	border: 1px solid #000;
+	padding: 2px;
+}
+.font-size-small {
+	font-size: small;
+}
+.item-container {
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.bill-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 5px 0;
+}
+.tac {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 30%;
+	padding: 10;
+	margin: auto;
+	width: 80%;
+	background-color: #fff;
+	color: #000;
+	z-index: 20;
+}
+.tac-full {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	color: #000;
+	z-index: 30;
+}
+#navbar {
+	width: 100%;
+	overflow: auto;
+	white-space: nowrap;
+	background-color: #87cefa;
+	z-index: 1;
+	box-shadow: #E2E2E2 0px -2px 0px inset;
+}
+
+#navbar a {
+	display: inline-block;
+	color: #FFFFFF;
+	font-size: 20px;
+	text-align: center;
+	padding: 10px;
+	text-decoration: none;
+}
+
+#navbar a:hover {
+	border-bottom: 2px solid #1e90ff;
+}
+
+.sticky {
+	position: fixed;
+	top: 0;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" data-rh="true">
+</head>
+<body>
+<script>
+var words = {
+	l_name: "お名前",
+	l_people: "人",
+	l_note: "備考",
+	l_adult: "大人",
+	l_children: "子供",
+	l_take: "上記で予約する",
+	l_update: "情報の更新",
+	l_data_update: "情報が更新されました",
+	l_number: "番号",
+	l_alert_name_null: "名前をご記入してください",
+	l_alert_adult_zero: "子供のみの利用はできません",
+	l_seat_assigned: "Seat is assigned",
+	n_number_prefix: "あなたの番号は",
+	n_number_suffix: "番です。",
+	n_do_lineup: "先に席を確保をお願い致します。",
+	n_wait_seat: "席が確定するまで少々お待ちください。",
+	n_food_add: "をカートに追加されました。",
+	c_add: "カートに入れる",
+	c_name: "カート",
+	c_place: "注文",
+	o_delete: "削除",
+	o_empty: "ご注文がありません",
+	o_seat: "席",
+	o_hi: "お客様",
+	o_orders: "注文履歴",
+	o_split: "お会計を割り勘しますか？",
+	o_title: "ご注文",
+	o_people: "人分",
+	o_delivered: "提供済み",
+	o_preparing: "準備中",
+	o_subtotal: "小計:",
+	o_service: "サービス料",
+	o_tax: "消費税",
+	o_total: "合計",
+	t_got: "戻る",
+	t_tittle: "Menyのご利用規約について",
+	t_content: "※引き続きサービスを利用するには、ご利用規約に同意していただく必要があります。",
+	t_button: "同意して予約する",
+	t_footer: "利用規約",
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var restaurant = {"rid":"5f6200b97f11c030c1ddf576","r_name":"やきとり"};
+var categories = [{"cid":"5f6205647f11c030c1ddf6e9","rid":"5f6200b97f11c030c1ddf576","name":"焼き鳥","foods":null,"order":0},{"cid":"5f62060c7f11c030c1ddf8fc","rid":"5f6200b97f11c030c1ddf576","name":"サイドメニュー","foods":null,"order":0},{"cid":"5f62064d7f11c030c1ddf942","rid":"5f6200b97f11c030c1ddf576","name":"ドリンク","foods":null,"order":0},{"cid":"5f72eea87f11c030c1e15e5c","rid":"5f6200b97f11c030c1ddf576","name":"定番メニュー","foods":null,"order":0},{"cid":"5f9661207f11c030c1ea8867","rid":"5f6200b97f11c030c1ddf576","name":"人気物","foods":null,"order":0},{"cid":"5f9661447f11c030c1ea8883","rid":"5f6200b97f11c030c1ddf576","name":"丼","foods":null,"order":0},{"cid":"5f96b1217f11c030c1ea9bc9","rid":"5f6200b97f11c030c1ddf576","name":"お子様メニュー","foods":null,"order":0},{"cid":"5f9796dd7f11c030c1eace79","rid":"5f6200b97f11c030c1ddf576","name":"カツ丼","foods":null,"order":0},{"cid":"5f98d5157f11c030c1eb0330","rid":"5f6200b97f11c030c1ddf576","name":"麺類2","foods":null,"order":0},{"cid":"5f990dc07f11c030c1eb19cc","rid":"5f6200b97f11c030c1ddf576","name":"ピザ","foods":null,"order":0},{"cid":"5fa1f7b87f11c030c1ececbc","rid":"5f6200b97f11c030c1ddf576","name":"Testing","foods":null,"order":0},{"cid":"5fa3505a7f11c030c1ed4df5","rid":"5f6200b97f11c030c1ddf576","name":"カテゴリー新しい","foods":null,"order":0},{"cid":"5fa4ac437f11c030c1ed9b80","rid":"5f6200b97f11c030c1ddf576","name":"EditNew","foods":null,"order":0},{"cid":"5fa9ffe87f11c030c1eed9ec","rid":"5f6200b97f11c030c1ddf576","name":"Testting@¥","foods":null,"order":0},{"cid":"5faa079f7f11c030c1eeded1","rid":"5f6200b97f11c030c1ddf576","name":"Ptt","foods":null,"order":0},{"cid":"5faa087a7f11c030c1eedf49","rid":"5f6200b97f11c030c1ddf576","name":"qqa","foods":null,"order":0},{"cid":"5faa8c757f11c030c1ef0c3d","rid":"5f6200b97f11c030c1ddf576","name":"変更","foods":null,"order":0},{"cid":"5fb487de7f11c030c1f1c90b","rid":"5f6200b97f11c030c1ddf576","name":"a","foods":null,"order":0},{"cid":"5fb4eacc7f11c030c1f1f968","rid":"5f6200b97f11c030c1ddf576","name":"new category","foods":null,"order":0},{"cid":"5fb5349f7f11c030c1f2103e","rid":"5f6200b97f11c030c1ddf576","name":"louis category","foods":null,"order":0},{"cid":"5fb632807f11c030c1f256ae","rid":"5f6200b97f11c030c1ddf576","name":"tkっh、skdm","foods":null,"order":0},{"cid":"5fb646cc7f11c030c1f269a7","rid":"5f6200b97f11c030c1ddf576","name":"louis smoke test category","foods":null,"order":0}];
+var foods = [{"fid":"5f6205657f11c030c1ddf6f2","rid":"5f6200b97f11c030c1ddf576","cid":"5f6205647f11c030c1ddf6e9","name":"もも","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/momo.jpg","desc":"Test","price":200,"order":0},{"fid":"5f6205d47f11c030c1ddf8d6","rid":"5f6200b97f11c030c1ddf576","cid":"5f6205647f11c030c1ddf6e9","name":"むねね","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/mune.jpg","desc":"","price":200,"order":0},{"fid":"5f6205e07f11c030c1ddf8e6","rid":"5f6200b97f11c030c1ddf576","cid":"5f6205647f11c030c1ddf6e9","name":"かわ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/kawa.jpg","desc":"","price":150,"order":0},{"fid":"5f62060d7f11c030c1ddf908","rid":"5f6200b97f11c030c1ddf576","cid":"5f62060c7f11c030c1ddf8fc","name":"唐揚げ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/karaage.jpg","desc":"","price":300,"order":0},{"fid":"5f6206227f11c030c1ddf914","rid":"5f6200b97f11c030c1ddf576","cid":"5f62060c7f11c030c1ddf8fc","name":"エイヒレ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/eihire.jpg","desc":"","price":300,"order":0},{"fid":"5f62062b7f11c030c1ddf91c","rid":"5f6200b97f11c030c1ddf576","cid":"5f62060c7f11c030c1ddf8fc","name":"たまご","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/tamago.jpg","desc":"","price":300,"order":0},{"fid":"5f6206317f11c030c1ddf926","rid":"5f6200b97f11c030c1ddf576","cid":"5f62060c7f11c030c1ddf8fc","name":"とうもろこし","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/corn.jpg","desc":"","price":300,"order":0},{"fid":"5f6206377f11c030c1ddf930","rid":"5f6200b97f11c030c1ddf576","cid":"5f9661207f11c030c1ea8867","name":"やきそば","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakisoba.jpg","desc":"","price":300,"order":0},{"fid":"5f62063b7f11c030c1ddf938","rid":"5f6200b97f11c030c1ddf576","cid":"5f6205647f11c030c1ddf6e9","name":"やきうどん","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakiudon.jpg","desc":"","price":300,"order":0},{"fid":"5f62064f7f11c030c1ddf94d","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"ハイボール","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/high+ball.jpg","desc":"","price":500,"order":0},{"fid":"5f62066a7f11c030c1ddf95c","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"レモンサワー","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/lemon+sour.jpg","desc":"","price":500,"order":0},{"fid":"5f6206717f11c030c1ddf965","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"コーラ1","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/cola.jpg","desc":"","price":500,"order":0},{"fid":"5f6206887f11c030c1ddf974","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"ジンジャーエール","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/gingerale.jpg","desc":"","price":500,"order":0},{"fid":"5f6206937f11c030c1ddf97f","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"オレンジジュース1","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/orange.jpg","desc":"","price":500,"order":0},{"fid":"5f72eea87f11c030c1e15e68","rid":"5f6200b97f11c030c1ddf576","cid":"5f72eea87f11c030c1e15e5c","name":"チャーハン","image":"","desc":"一番美味しい","price":1000,"order":0},{"fid":"5f85220c7f11c030c1e6acd6","rid":"5f6200b97f11c030c1ddf576","cid":"5f6205647f11c030c1ddf6e9","name":"つくね","image":"","desc":"","price":200,"order":0},{"fid":"5f9661257f11c030c1ea8874","rid":"5f6200b97f11c030c1ddf576","cid":"5f9661207f11c030c1ea8867","name":"チャーハン","image":"","desc":"","price":990,"order":0},{"fid":"5f96b1267f11c030c1ea9bd8","rid":"5f6200b97f11c030c1ddf576","cid":"5f96b1217f11c030c1ea9bc9","name":"test","image":"","desc":"test","price":1000,"order":0},{"fid":"5f9796e17f11c030c1eace89","rid":"5f6200b97f11c030c1ddf576","cid":"5f9796dd7f11c030c1eace79","name":"豚","image":"","desc":"美味しい","price":1000,"order":0},{"fid":"5f98d5177f11c030c1eb0343","rid":"5f6200b97f11c030c1ddf576","cid":"5f98d5157f11c030c1eb0330","name":"焼きそば3","image":"","desc":"22","price":400,"order":0},{"fid":"5f990dc07f11c030c1eb19cf","rid":"5f6200b97f11c030c1ddf576","cid":"5f990dc07f11c030c1eb19cc","name":"マーガレット222’e","image":"","desc":"","price":10001567,"order":0},{"fid":"5f990dc87f11c030c1eb19e0","rid":"5f6200b97f11c030c1ddf576","cid":"5f990dc07f11c030c1eb19cc","name":"Ress","image":"","desc":"","price":10000,"order":0},{"fid":"5f9bc0e27f11c030c1ebd3ba","rid":"5f6200b97f11c030c1ddf576","cid":"5f990dc07f11c030c1eb19cc","name":"ppppvgbn","image":"","desc":"123","price":1111,"order":0},{"fid":"5fa1f8467f11c030c1ececea","rid":"5f6200b97f11c030c1ddf576","cid":"5fa1f7b87f11c030c1ececbc","name":"Kt,tm","image":"","desc":"Kemw","price":12,"order":0},{"fid":"5fa4a71c7f11c030c1ed98bf","rid":"5f6200b97f11c030c1ddf576","cid":"5f62060c7f11c030c1ddf8fc","name":"もも","image":"","desc":"Nej","price":150,"order":0},{"fid":"5fa4a8a27f11c030c1ed9999","rid":"5f6200b97f11c030c1ddf576","cid":"5f62064d7f11c030c1ddf942","name":"もも","image":"","desc":"Bw ","price":2005,"order":0},{"fid":"5faa07cc7f11c030c1eedf03","rid":"5f6200b97f11c030c1ddf576","cid":"5faa079f7f11c030c1eeded1","name":"Jak","image":"","desc":"Nn","price":900,"order":0}];
+var cats_hasfood = {}
+var fid = "";
+var do_lineup =  false ;
+var do_view =  false ;
+var show_tc =  true
+var lineup = {};
+var orders =  null ;
+var current_tos_version = "20201021"
+var cartElement;
+var cart = {};
+var food_price = {};
+var notificationElement;
+var currencySymbol = '¥'
+var service_pct =  3 ;
+var tax_pct = 10;
+var selectedFood = null
+var $food;
+if(foods != null) {
+	foods.forEach(function(food) {
+		food_price[food['fid']] = food['price']
+		cats_hasfood[food['cid']] = true
+	});
+}
+function update_cart_button() {
+	total_number = 0;
+	total_price = 0;
+	foods.forEach(function(food) {
+		if(amount = cart[food['fid']]) {
+			total_number += amount;
+			total_price += food['price'] * amount;
+		}
+	});
+	$('.cart_total_number').text(total_number)
+	$('.cart_total_price').text('¥' + total_price)
+}
+function show_notification(message) {
+	notificationElement.html(message);
+	notificationElement.fadeIn(0).fadeOut(2500);
+}
+function show_alert(message) {
+	alertElement = $('#alert');
+	alertElement.find('#message').text(message);
+	alertElement.show();
+}
+function valueMatch(a, b, value) {
+    if (!a) a = value;
+    if (!b) b = value;
+    return a == b;
+}
+function string_limit_length(s, max) {
+	var l = 0;
+	var i = 0;
+	for (; i < s.length; i++) {
+		if(s.charCodeAt(i) < 0x80) l++;
+		else l += 2;
+		if(l >= max)
+			return s.substring(0, i) + "...";
+	}
+	return s;
+}
+
+function get_food_by_fid(fid) {
+	for(var i = 0;i < foods.length;i++) {
+		$food = foods[i];
+		if($food['fid'] == fid)
+			return $food;
+	}
+}
+
+function change_cart(fid, amount) {
+	if(!cart[fid])
+		cart[fid] = 0;
+	if (cart[fid] + amount > 0) {
+		cart[fid] += amount;
+	}
+	Cookies.set('cart', JSON.stringify(cart));
+	cart_food = $('[fid="' + fid +  '"]');
+	if (cart[fid] == 1) {
+		cart_food.find("#minus").attr('enabled', false);
+	} else {
+		cart_food.find("#minus").removeAttr('enabled');
+	}
+	cart_food.find("#amount").text(cart[fid]);
+	cart_food.find("#price").text(cart[fid]*food_price[fid])
+	update_cart_button();
+}
+
+function remove_from_cart(fid) {
+	delete cart[fid];
+	$('[fid="' + fid +  '"]').remove();
+	Cookies.set('cart', JSON.stringify(cart));
+	update_cart_button();
+	if (Object.keys(cart).length == 0) {
+		cartElement.hide();
+		$('.food-top').remove();
+	}
+}
+
+function get_top_element() {
+	topElement = $('<div>').addClass('food-top');
+	topElement.append($head = $('<div>').append(
+			closeButton = $('<button id="close">')
+				.attr('aria-label', 'close')
+				.css('display', 'flex')
+				.css('position', 'absolute')
+				.css('padding', 0)
+				.css('width', '48px')
+				.css('height', '48px')
+				.css('left', '8px')
+				.css('top', '8px')
+				.css('background', '#FFFFFF')
+				.css('border-radius', '50%')
+				.css('border-width', 0)
+				.css('align-items', 'center')
+				.css('justify-content', 'center')
+				.append($('<div>')
+					.css('width', '24px')
+					.css('height', '24px')
+					.append(
+					$svg = $('<svg viewBox="0 0 24 24"><path d="m19.5831 6.24931-1.8333-1.83329-5.75 5.83328-5.75-5.83328-1.8333 1.83329 5.8333 5.74999-5.8333 5.75 1.8333 1.8333 5.75-5.8333 5.75 5.8333 1.8333-1.8333-5.8333-5.75z" fill="#000000"></svg>')
+						.css('width', '24px')
+						.css('height', '24px')
+						.css('fill', 'none')
+						.css('overflow', 'hidden')
+						.attr('width', '24px')
+						.attr('height', '24px')
+						.attr('fill', 'none')
+						.attr('xmlns', 'http://www.w3.org/2000/svg')
+						.attr('role', 'presentation')
+						.attr('aria-hidden', 'true')
+						.attr('focusable', 'false')
+				)
+			)
+		)
+	);
+	closeButton.click(function() {
+		topElement.remove();
+		window.history.pushState(null, "", ".");
+	})
+	return topElement;
+}
+
+function show_cart_items() {
+	var $main = $("main");
+	$main.append($cart = get_top_element());
+
+	$cart.append($food_container = $('<div>').css('margin', '80 5% 0 5%').css('width', '90%').css('padding-bottom', '50px'));
+	$food_container.append(
+		$('<div>').text(words['o_title']).css('margin-bottom', 10).css('font-size', '24px')
+	)
+	$.each(cart, function(fid, $amount) {
+		$food = get_food_by_fid(fid);
+		if(!$food) {
+			remove_from_cart(fid);
+			return;
+		}
+		$food_container.append($('<div>')
+			.attr('fid', fid)
+			.addClass('flex-r')
+			.css('margin-bottom', 10)
+			.css('padding-bottom', 10)
+			.css('border-bottom', '1px solid #e8e8e8')
+			.append(
+				cart_food_image_container = $('<div>').css('flex', '0 0 20%')
+			)
+			.append(
+				$('<div>').css('flex', '0 0 65%').addClass('flex-c').css('justify-content', 'space-between')
+				.append(
+					$('<div>' + $food['name'] + '</div>').css('margin-bottom', '2px').css('padding-left', '5px')
+				)
+				.append(
+					$('<div>¥' + $food['price'] + '</div>').css('font-size', '16px').css('color', '#545454').css('margin-bottom', '2px').css('padding-left', '5px')
+				)
+				.append(
+					$('<div>').addClass('cart-amount-div').css('padding-left', '5px')
+					.append(
+						$('<button id="minus">-</button>').addClass('cart-button-base').addClass('cart-button-l')
+						.attr('enabled', $amount != 1)
+						.click($food, function (e) {
+							change_cart(e.data['fid'], -1);
+						})
+					)
+					.append(
+						$('<span id="amount">' + $amount + '</span>').addClass('cart-span')
+					)
+					.append(
+						$('<button id="plus">+</button>').addClass('cart-button-base').addClass('cart-button-r')
+						.click($food, function (e) {
+							change_cart(e.data['fid'], 1);
+						})
+					)
+				)
+			)
+			.append(
+				$('<div>')
+				.addClass('flex-c')
+				.css('flex', '0 0 15%')
+				.css('align-items', 'flex-end')
+				.css('justify-content', 'center')
+				.append(
+					$('<p>')
+					.append('¥')
+					.append(
+						$('<span id="price">' + $amount*$food['price'] + '</span>')
+					)
+				)
+				.append(
+					$('<button id="delete">' + words['o_delete'] + '</button>').addClass('cart-button-delete').click($food, function (e) {
+						remove_from_cart(e.data['fid']);
+					})
+				)
+			)
+			.click(function(e) { e.stopPropagation(); })
+		);
+		if($food['image']) {
+			cart_food_image_container.append(
+					$('<img>').attr('title', $food['name']).attr('src', $food['image']).attr('aria-hidden', 'true').css('max-width', '100%')
+				);
+		}
+	});
+	$cart.append(
+		$('<div>').addClass('footer-container').append(
+		$('<div>').addClass('footerButton').click(async function() {
+			if (!lineup['number']) {
+				$cart.remove();
+				show_lineup();
+				show_notification('<p><strong>' + words['n_do_lineup'] + '</strong></p>');
+				return
+			}
+			if (!lineup['seat']) {
+				$cart.remove();
+				show_alert(words['n_wait_seat']);
+				return
+			}
+			var itemlist = [];
+			let index = 1;
+			$.each(cart, function(key, value) {
+				let item = {};
+				item['id'] = index;
+				item['fid'] = key;
+				if(value > 1)
+					item['quantity'] = value;
+				itemlist.push(item);
+				index++;
+			});
+			OrderData = {
+				items: itemlist,
+			};
+			$.post("order", JSON.stringify(OrderData), function(data) {
+
+				Cookies.remove('cart');
+				cart = {};
+				cartElement.hide();
+				$cart.remove();
+				orders = data;
+				$('header').html(header = get_header());
+			});
+		})
+		.append($('<div>').addClass('cart_total_number'))
+		.append($('<div>').text(words['c_place']))
+		.append($('<div>').addClass('cart_total_price'))
+		)
+	);
+}
+
+function detail_amount_control() {
+	container = $('<div>').addClass('detail-amount-group');
+	container
+		.append(
+			$('<button>').addClass('svg-container-48-circle svg-minus')
+			.attr('enabled', 'false')
+			.append(
+				$svg = $('<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"></svg>')
+				.css('width', '24px')
+				.css('height', '24px')
+				.attr('xmlns', 'http://www.w3.org/2000/svg')
+				)
+			.click(function () {
+				var inputElem = $(this).parent().find('.detail-amount');
+				var value = parseInt(inputElem.text());
+				if(value == 1) {
+					return;
+				}
+				value -= 1;
+				inputElem.text(value)
+				if(value == 1) {
+					$(this).attr('enabled', 'false');
+				}
+			})
+		)
+		.append($('<div>').addClass('detail-amount').text('1'))
+		.append(
+			$('<button>').addClass('svg-container-48-circle svg-plus')
+			.append(
+				$svg = $('<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></svg>')
+				.css('width', '24px')
+				.css('height', '24px')
+				.attr('xmlns', 'http://www.w3.org/2000/svg')
+			)
+			.click(function () {
+				var inputElem = $(this).parent().find('.detail-amount');
+				inputElem.text(parseInt(inputElem.text()) + 1)
+				$(this).parent().find('.svg-minus').removeAttr('enabled');
+			})
+		)
+	return container;
+}
+
+function show_food($food) {
+	var $main = $("main");
+	$main.append($detail = get_top_element());
+	$detail.find('#close').click(function() {
+		window.history.pushState(null, "", (do_view?"../?do_view":"."));
+	});
+	margin_top = 60;
+	$detail.append($food_detail_container = $('<div>'));
+	if($food['image']) {
+		margin_top = 0;
+		$food_detail_container.append($('<div>').addClass('food-detail-img-container').css('background-image', 'url("' + $food['image'] + '")')
+		);
+		$food_detail_container.append($('<div>').css('padding', '8px 24px').append(
+				$('<div>' + $food['name'] + '</div>').css('font-size', '36px')
+			)
+		);
+	} else {
+		$food_detail_container.append($('<div>').css('padding', '58px 24px').append(
+				$('<div>' + $food['name'] + '</div>').css('font-size', '36px')
+			)
+		);
+	}
+	$food_detail_container.append($('<div>').css('padding', '8px 24px').append(
+			$('<div>' + $food['desc'] + '</div>').css('font-size', '20px').css('color', '#545454')
+		)
+	);
+	$food_detail_container.append($('<div>').css('padding', '8px 24px').append(
+			$('<div>¥' + $food['price'] + '</div>').css('font-size', '24px')
+		)
+	);
+
+	if(!do_view) {
+		$food_detail_container.append(
+			footer_container = $('<div>').addClass('footer-container')
+			.append(detail_amount_control())
+			.append(
+			$('<div>').text(words['c_add']).addClass('footerButton').attr('id', 'addtocart').click(async function() {
+				change_cart($food['fid'], parseInt($('.detail-amount').text()));
+				show_notification('<p><strong>' + $food['name'] + '</strong> ' + words['n_food_add'] + '</p>');
+				cartElement.show();
+				$detail.remove();
+				update_cart_button();
+				window.history.pushState(null, "", ".");
+			})
+			)
+		);
+		$food_detail_container.css('padding-bottom', footer_container.outerHeight());
+	}
+	window.history.pushState($food, "", $food['fid'] + (do_view?"/?do_view":""));
+}
+
+function amount_control(name, default_value) {
+		container = $('<div>').css('display', 'flex').css('flex-direction', 'row').css('margin-bottom', '0px');
+		container.append(
+			$('<div>').css('flex', '0 0 30%').css('margin-bottom', '0px').data('type', 'minus').append(
+				$('<button>').addClass('svg-container-24-circle svg-minus')
+				.append(
+					$svg = $('<svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"></svg>')
+					.css('width', '24px')
+					.css('height', '24px')
+					.attr('xmlns', 'http://www.w3.org/2000/svg')
+				)
+			)
+		);
+		container.append(
+			$('<div>').css('flex', '0 0 40%').css('margin-bottom', '0px').append(
+				$('<input>').css('width', '80%').css('text-align', 'center').attr('name', name).attr('readonly', 'true').val(lineup[name]?lineup[name]:default_value)
+			)
+		);
+		container.append(
+			$('<div>').css('flex', '0 0 30%').css('margin-bottom', '0px').data('type', 'plus').append(
+				$('<button>').addClass('svg-container-24-circle svg-plus')
+				.append(
+					$svg = $('<svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></svg>')
+					.css('width', '24px')
+					.css('height', '24px')
+					.attr('xmlns', 'http://www.w3.org/2000/svg')
+				)
+			)
+		);
+		container.children().click(function(event) {
+			valElement = $(this).parent().find('input');
+			valCurrent = parseInt(valElement.val());
+			if ( $(this).data('type') == 'plus') {
+				valElement.val(valCurrent + 1);
+			}
+			else if( $(this).data('type') == 'minus' &&  valCurrent > default_value) {
+				valElement.val(valCurrent - 1);
+			}
+		});
+		return container;
+	}
+
+function get_lineup() {
+	lineupElement = $('<div>').css('font-size', '16px');
+	if($(window).width() > 768)
+		lineupElement.css('width', 690).css('margin', '0 auto');
+	else
+		lineupElement.css('width', '90%').css('margin-left', '5%');
+	lineupElement.append(
+		$('<div>').css('padding-bottom', '10px').append(
+			$('<input>').css('width', '100%').css('padding', '8px').attr('placeholder', words['l_name']).attr('name', 'name').val(lineup['name'])
+		)
+	);
+	lineupElement.append(
+		$('<div>').css('display', 'flex').css('flex-direction', 'row').css('text-align', 'left').css('padding-bottom', '10px')
+			.append(
+				$('<div>').css('border-style', 'solid').css('border-width', '1px').css('flex', '0 0 43%').css('padding', '8px').css('display', 'flex').css('flex-direction', 'row')
+				.append(
+					$('<div>').css('flex', '0 0 40%').text(words['l_adult'])
+				)
+				.append(
+					$('<div>').css('flex', '0 0 60%').append(selectAdult = $('<select id="adult" name="adult">').css('width', '100%').css('border', '0').css('outline', 0).css('font-size', '16px').css('padding-top', '3px'))
+				)
+			)
+			.append(
+				$('<div>').css('flex', '0 0 2%')
+			)
+			.append(
+				$('<div>').css('border-style', 'solid').css('border-width', '1px').css('flex', '0 0 43%').css('padding', '8px').css('display', 'flex').css('flex-direction', 'row')
+				.append(
+					$('<div>').css('flex', '0 0 40%').text(words['l_children'])
+				)
+				.append(
+					$('<div>').css('flex', '0 0 60%').append(selectChild = $('<select id="child" name="child">').css('width', '100%').css('border', '0').css('outline', 0).css('font-size', '16px').css('padding-top', '3px'))
+				)
+			)
+	);
+	for(i = 1;i < 10;i++) {
+		selectAdult.append($('<option>').val(i).text(i + words['l_people']));
+	}
+	if(lineup.adult) selectAdult.val(lineup.adult);
+	selectAdult.append($('<option>').val(10).text('10+ 	' + words['l_people']));
+	for(i = 0;i < 10;i++) {
+		selectChild.append($('<option>').val(i).text(i + words['l_people']));
+	}
+	if(lineup.child) selectChild.val(lineup.child);
+	lineupElement.append(
+		$('<div>').css('padding-bottom', '10px').append(
+			$('<textarea>').attr('rows', 3).css('width', '100%').css('padding', '8px').attr('placeholder', words['l_note']).attr('name', 'note').val(lineup['note'])
+		)
+	);
+	lineupElement.append(
+		$('<div>').css('width', '100%').append(
+			$('<div>').css('width', '90%').css('border-style', 'solid').css('text-align', 'center').css('margin', '0 auto').css('background-color', '#BA1F23').css('color', '#FFFFFF').css('padding', '16px')
+				.append(lineup['number']?words['l_update']:words['l_take'])
+				.click(function(e) {
+					nameElement = lineupElement.find("input[name=name]");
+					if(nameElement.val().length < 1) {
+						nameElement.attr('placeholder', words['l_alert_name_null'])
+						nameElement.focus();
+						return;
+					}
+					nameElement.find("input[name=name]").attr('placeholder', '');
+					if(parseInt(lineupElement.find("input[name=adult]").val()) < 1) {
+						$('#reservation_warning').html(words['l_alert_adult_zero'])
+						return;
+					}
+					$('#reservation_warning').html('')
+					bChanged = false;
+					if(!valueMatch(lineup['name'], lineupElement.find("input[name=name]").val(), '')) {
+						lineup['name'] = lineupElement.find("input[name=name]").val()
+						bChanged = true;
+					}
+					if(!valueMatch(lineup['adult'], parseInt(lineupElement.find("select[name=adult]").val()), 0)) {
+						lineup['adult'] = parseInt(lineupElement.find("select[name=adult]").val());
+						bChanged = true;
+					}
+					if(!valueMatch(lineup['child'], parseInt(lineupElement.find("select[name=child]").val()), 0)) {
+						lineup['child'] = parseInt(lineupElement.find("select[name=child]").val());
+						bChanged = true;
+					}
+					if(!valueMatch(lineup['note'], lineupElement.find("textarea[name=note]").val(), '')) {
+						lineup['note'] = lineupElement.find("textarea[name=note]").val()
+						bChanged = true;
+					}
+					if(!bChanged) {
+						topElement.remove();
+						return;
+					}
+					$.post("lineup", JSON.stringify(lineup), function(data) {
+						var alert_string;
+						if(lineup['number'] != data['number']) {
+							alert_string = words['n_number_prefix'] + data['number'] + words['n_number_suffix']
+						} else {
+							alert_string = words['l_data_update']
+						}
+						orders = null;
+						lineup = data;
+						$('header').html(header = get_header());
+						topElement.remove();
+						show_alert(alert_string)
+						window.history.pushState(null, "", ".");
+					});
+				})
+		)
+	);
+	return $('<div>').css('text-align', 'center').css('margin-top', '80').css('margin-bottom', '15').append(lineupElement);
+}
+
+function get_quantity(item) {
+	let quantity;
+	if(!item['quantity'])
+		quantity = 1;
+	else
+		quantity = item['quantity'];
+	return quantity
+}
+
+function cal_total_price() {
+	if(null == orders || null == foods) return currencySymbol + ': 0';
+	let food_by_id = {};
+	let order_total = 0;
+	foods.forEach(function (food) {
+		food_by_id[food['fid']] = food;
+	});
+	orders.forEach(function (order) {
+		order['items'].forEach(function (item) {
+			if(item['cancel']) return;
+			var total = order_total?order_total:0;
+			total += food_by_id[item['fid']]['price'] * get_quantity(item);
+			order_total = total;
+		});
+	});
+	let subtotal = order_total + Math.floor(order_total*service_pct/100)
+	let user_total = subtotal + Math.floor(subtotal*tax_pct/100)
+	return currencySymbol + ': ' + user_total;
+}
+
+function get_bill() {
+	bill_holder = $('<div>').addClass('container');
+	bill_holder.append(title = $('<div>'))
+	title.append($('<div>').text(words['o_hi']).css('text-align', 'center'))
+	title.append($('<div>').text(words['o_orders']).css('text-align', 'center'))
+	if(null == orders) {
+		bill_holder.append(
+			$('<div>').text(words['o_empty']).addClass('order_container')
+			.css('text-align', 'center')
+		)
+		return bill_holder;
+	}
+	var food_by_id = {};
+	var user_summary;
+	var user_total;
+	var order_total = 0;
+	foods.forEach(function (food) {
+		food_by_id[food['fid']] = food;
+	});
+	orders.forEach(function (order) {
+		var created_time = new Date(order['created']);
+		if((user_frame = user_summary) === undefined) {
+			bill_holder.append(
+				user_frame = user_summary = $('<div>').addClass('order_container')
+				.append($('<div>').addClass('item'))
+				.append(price_container = $('<div>'))
+			);
+			price_container.append(split_control = $('<div>'))
+			price_container.append($('<div>').addClass('bill-item')
+				.append($('<span>').text(words['o_subtotal']))
+				.append($('<span>').addClass('order-price'))
+			)
+			price_container.append($('<div>').addClass('bill-item').css('border-bottom', '1px solid #000')
+				.append($('<span>').text(words['o_service'] + '(' + service_pct + '%):'))
+				.append($('<span>').addClass('service-charge'))
+			)
+			price_container.append($('<div>').addClass('bill-item')
+				.append($('<span>'))
+				.append($('<span>').addClass('subtotal'))
+			)
+			price_container.append($('<div>').addClass('bill-item').css('border-bottom', '1px solid #000')
+				.append($('<span>').text(words['o_tax'] + '(' + tax_pct + '%):'))
+				.append($('<span>').addClass('tax'))
+			)
+			price_container.append($('<div>').addClass('bill-item')
+				.append($('<span>').text(words['o_total']))
+				.append($('<div>')
+					.append($('<span>').addClass('price'))
+					.append($('<span>').attr('id', 'split-people').addClass('split-control').text(' / 1').hide())
+					.append($('<span>').attr('id', 'split-price').addClass('split-control').hide())
+				)
+			)
+			split_control.append($('<div><strong>' + words['o_split'] + '</strong></div>')
+				.css('margin', '5px 0')
+				.css('display', 'flex')
+				.css('font-size', '12px')
+				.css('align-items', 'center')
+				.append($('<input>').attr('type', 'checkbox')
+					.change(function() {
+						$('.split-control').toggle();
+					})
+				)
+				.append($('<div>').attr('id', 'split-input').addClass('split-control').hide()
+					.append(
+						people_select = $('<select>').css('width', '30px').css('margin-left', '5px')
+						.change(function() {
+							var people = $(this).val()
+							if(people == "" || people <= 0) { people = 1; }
+							$('#split-people').text(' / ' + people)
+							$('#split-price').text(' = ' + (user_total/people).toFixed(2))
+						})
+					)
+					.append($('<span>').text(words['o_people']).css('color', '#f00'))
+				)
+			)
+			people_amount = parseInt(lineup['adult']) + parseInt(lineup['child']?lineup['child']:0)
+			for(var i=1; i<= people_amount; i++) {
+				people_select.append($('<option>', {value:i, text:i}))
+			}
+		}
+		user_frame.children(".item")
+		.append($order_info = $('<div>').addClass('order-info')
+					.append($('<div>' + created_time.toLocaleString() + '</div>').addClass('font-size-small'))
+					.append(time = $('<div>'))
+		)
+		.append($order_list = $('<div>').addClass('order-list'));
+		var item_index = 0;
+		var order_finish = true;
+		var all_cancel = true;
+		order['items'].forEach(function (item) {
+			item_index++;
+			$order_list.append($item_container = $('<div>').addClass('item-container'))
+			if(item['cancel']) {
+				$item_container.append(
+					$('<div>' + item_index + '. ' + food_by_id[item['fid']]['name'] + '</div>')
+					.css('text-decoration', 'line-through')
+				)
+				if(order_finish == false) order_finish = false
+				return
+			}
+			if(order_finish == false || item['amount'] == 0)
+				order_finish = false
+			all_cancel = false
+			$item_container.append(
+				$('<div>' + item_index + '. ' + food_by_id[item['fid']]['name'] + '</div>').css('flex-basis', '80%').css('border-right', '1px solid #000')
+			)
+			.append(
+				$('<div>' + food_by_id[item['fid']]['price'] + '</div>').css('flex-basis', '14%').css('text-align', 'right')
+			)
+			.append(
+				$('<div>x' + get_quantity(item) + '</div>').css('flex-basis', '6%').css('text-align', 'right')
+			)
+			var total = order_total?order_total:0;
+			total += food_by_id[item['fid']]['price'] * get_quantity(item);
+			order_total = total;
+		});
+		if(!all_cancel) {
+			if(order_finish) {
+				time.text(words['o_delivered']).css('background-color', '#1E90FF').css('color', '#fff')
+			} else {
+				time.text(words['o_preparing']).css('background-color', '#DC143C').css('color', '#fff')
+			}
+		}
+		var service_charge = Math.floor(order_total*service_pct/100)
+		var subtotal = order_total + service_charge
+		var tax = Math.floor(subtotal*tax_pct/100)
+		user_total = subtotal + tax
+		price_container.children(".bill-item").children(".order-price").text(currencySymbol + order_total);
+		price_container.children(".bill-item").children(".service-charge").text(currencySymbol + service_charge);
+		price_container.children(".bill-item").children(".subtotal").text(currencySymbol + subtotal);
+		price_container.children(".bill-item").children(".tax").text(currencySymbol + tax);
+		price_container.children(".bill-item").children().children(".price").text(currencySymbol + user_total);
+	});
+	return bill_holder;
+}
+
+function show_bill() {
+	topElement = get_top_element();
+	topElement.append(get_bill());
+	$("main").append(topElement);
+}
+
+function show_lineup() {
+	if(lineup && lineup.seat) {
+		if(do_lineup) window.history.pushState($food, "", ".");
+		return;
+	}
+	topElement = get_top_element();
+	topElement.append(get_lineup());
+	$("main").append(topElement);
+	window.history.pushState($food, "", "?do_lineup");
+}
+
+function get_header() {
+	header = $('<div>').css('display', 'flex').css('flex-direction', 'row').css('margin-bottom', '0px');
+	header.append($('<div>').css('flex', '0 0 20%').css('margin', '2 auto'));
+	header.append($('<div>').css('flex', '0 0 60%').css('margin', '2 auto').css('font-size', '18px').css('padding', '12 0').css('text-align', 'center').append("Powered by LYNKED"));
+	header.append($('<div>').css('flex', '0 0 20%').css('margin', '2 auto').append(
+		notify = $('<div>')
+			.attr('id', 'userInfo')
+			.css('text-align', 'center')
+			.css('margin', '5 auto')
+			.css('height', '50px')
+			.css('border-radius', '10px')
+			.css('padding', '1 0')
+			.css('display', 'flex')
+			.css('flex-direction', 'column')
+			.css('justify-content', 'center')
+			.css('align-items', 'center')
+		)
+	);
+	if(do_view) return header;
+	get_user_info(notify);
+	return header;
+}
+
+function get_user_info(notify) {
+	if(!notify || !notify.length) notify = $("#userInfo");
+	if(!notify.length) return;
+	notify.empty();
+	notify.css('background-color', '#8FBC8F')
+	if(lineup['seat']) {
+		notify.append($('<div>').css('font-size', '13px').append(words['o_seat'] + ': ' + lineup['seat']));
+		notify.append($('<div>').css('font-size', '13px').append(lineup['seat']?cal_total_price():''));
+		notify.click(function() { show_bill(); });
+	} else {
+		if(lineup['number']) {
+			notify.append($('<div>').css('font-size', '13px').append(words['l_number'] + ': ' + lineup['number']));
+			setTimeout(wait_for_seat, 10000);
+		} else {
+			notify.css('background-color', '#FFFFFF').css('align-items', 'flex-end');
+			notify.append($('<div>').css('background-size', '100% 100%').css('background-image', 'url(/assets/images/Japanese_Lineup.png)').css('width', '60px').css('height', '50px'));
+		}
+		notify.click(function() {
+			show_lineup();
+		});
+	}
+}
+
+function wait_for_seat() {
+	if(!lineup || !lineup.lid) return;
+	queryData = {};
+	queryData.lid = lineup.lid;
+	$.ajax({
+		url: '/apis/lineup/query',
+		data: JSON.stringify(queryData),
+		type: 'POST',
+		dataType: 'json',
+		success: function(returnData) {
+			if(!returnData || !returnData.lid || returnData.lid != lineup.lid) return;
+			if(!returnData.seat) {
+				setTimeout(wait_for_seat, 10000);
+				return;
+			}
+			lineup = returnData;
+			window.history.pushState($food, "", ".");
+			get_user_info();
+			$('.food-top').remove();
+			show_alert(words.l_seat_assigned);
+		},
+		error: function(xhr, ajaxOptions, thrownError){
+			console.log(xhr.status);
+			console.log(thrownError);
+			setTimeout(wait_for_seat, 60000);
+		}
+	});
+}
+
+function get_alert() {
+	alertElement = $('<div>').attr('id', 'alert').hide()
+	alertElement.append(
+		$('<div>').css('position', 'fixed').css('top', 0).css('left', 0).css('height', '100%').css('width', '100%').css('z-index', 10).css('background-color', '#000000').css('opacity', '0.1')
+		)
+	alertElement.append(
+		$('<div>').addClass('alert')
+		.append($('<div>').attr('id', 'message').css('text-align', 'center').css('margin-bottom', '10px').css('font-size', '20px'))
+		.append($('<input>').attr('type', 'button').attr('value', 'OK').css('font-size', '14px').click(function() {
+			$('#alert').hide();
+		})))
+	return alertElement;
+}
+
+function show_tac() {
+	if (!show_tc || Cookies.get('agree_tos') == current_tos_version) { return }
+	$('#tac-container').show();
+}
+
+function show_full_tac() {
+	$('#tac-link').show();
+	$("#showdiv").attr("src", "/articles/terms-of-service.html");
+}
+
+function get_full_tac(){
+	tacfullElement = $('<div>').attr('id', 'tac-link').hide()
+	tacfullElement.append($('<div>').addClass('tac-full')
+		.append($('<iframe>').attr('id', 'showdiv').css('height', '95%').css('width', '100%').css('border', 'none'))
+		.append($('<div>').text(words['t_got']).css('text-align', 'center').css('border', '1px solid #000').click(function(e) {
+			$('#tac-link').hide();
+			e.stopPropagation();
+		}))
+	)
+	return tacfullElement
+}
+
+function get_tac() {
+	tacElement = $('<div>').attr('id', 'tac-container').hide()
+	tacElement.append(
+		$('<div>').css('position', 'fixed').css('top', 0).css('left', 0).css('height', '100%').css('width', '100%').css('z-index', 20).css('background-color', '#000000').css('opacity', '0.1')
+	)
+	tacElement.append($('<div>').addClass('tac')
+		.append($('<div>').text(words['t_tittle']).css('font-size', '16px').css('text-align', 'center').css('font-weight', 'bolder').css('padding', '16px'))
+		.append($('<div>').text(words['t_content']).css('font-size', '16px'))
+		.append($('<div>').css('text-align', 'center').append($('<a>').attr('href', '#').text(words['t_footer']).css('font-size', '12px').css('color', '#BA1F23'))
+			.click(function() {
+				show_full_tac()
+			}))
+		.append($('<div>').css('text-align', 'center').append($('<a>').attr('href', '#').text('TERMS & CONDITIONS').css('font-size', '12px').css('color', '#BA1F23'))
+			.click(function() {
+				show_full_tac()
+			}))
+		.append($('<div>').css('margin', '20px 0').css('display', 'flex').css('justify-content', 'center')
+			.append($('<input>').attr('type', 'button').attr('value', words['t_button']).css('font-size', '14px').css('background-color', '#BA1F23').css('color', '#FFFFFF').css('border', 'none').css('padding', '16px').click(function(e) {
+				$('#tac-container').hide();
+				termsData = new FormData();
+				termsData.append('agree_tos', current_tos_version);
+				$.ajax({
+					type: 'POST',
+					data: termsData,
+					url: 'terms',
+					processData: false,
+					contentType: false
+				});
+				e.stopPropagation();
+			})))
+		)
+	return tacElement;
+}
+
+function get_category_nav_bar() {
+	navBar = $('<div>').attr('id', 'navbar')
+	for(var i = 0;i < categories.length;i++) {
+		if (cats_hasfood[categories[i]['cid']] != true)
+			continue;
+		navBar.append($('<a>').attr('href', '#'+categories[i]['cid']).text(categories[i]['name'])
+			.click(navBar, function(e) {
+				e.preventDefault();
+				navBar = e.data;
+
+				const navBarScrollL = navBar.scrollLeft();
+				const barShift = $(this).offset().left + navBarScrollL
+				navBar.animate({
+					scrollLeft: barShift
+				},0)
+
+				const navHeight = navBar.outerHeight()
+				const category = $(this).attr('href')
+				const categoryOffsetTop = $(category).offset().top;
+				let shift;
+				if(!navBar.hasClass('sticky')) {
+					shift = categoryOffsetTop - navHeight * 2
+				} else {
+					shift = categoryOffsetTop - navHeight
+				}
+				$('html,body').animate({
+					scrollTop: shift
+				}, 700)
+			})
+		)
+	}
+	return navBar
+}
+
+function get_food_block() {
+	$block = $('<ul>').addClass('list_style_none')
+	if (categories == null || foods == null ) return $block;
+	var fContainers = {};
+	var fCounts = {};
+	for(var i = 0;i < categories.length;i++) {
+		if (cats_hasfood[categories[i]['cid']] != true)
+			continue;
+		$block.append($cNode = $('<li>').addClass('padding_16_0'));
+		$cNode.append(
+			$('<h2>' + categories[i]['name'] + '</h2>')
+				.attr('id', categories[i]['cid'])
+				.addClass('font_size_20')
+				.addClass('line_height_24')
+				.addClass('color_000000')
+				.css('padding', '10px 0')
+				.css('margin', '0')
+		);
+		$cNode.append($f_container = $('<ul>').addClass('margin_bottom_16'));
+		fContainers[categories[i]['cid']] = $f_container;
+	}
+	for(var i = 0;i < foods.length;i++) {
+		$food = foods[i];
+		if(!$food['cid'])
+			continue;
+		if($food['fid'] == fid) selectedFood = $food;
+		$f_container = fContainers[$food['cid']]
+		$f_count = fCounts[$food['cid']]
+		if($f_count) fCounts[$food['cid']] = $f_count + 1;
+		else fCounts[$food['cid']] = 1;
+		$f_container.append(
+			$('<li>').addClass('overflow_hidden').append(
+				$('<div>')
+					.attr('tabindex', 0)
+					.addClass('text_decoration_none')
+					.click($food, function(e) {
+						show_food(e.data);
+					})
+					.append(
+						$fNode = $('<div>')
+							.addClass(($f_count?'border_top_1':'border_top_0'))
+							.addClass('display_flex')
+							.addClass('padding_16_0')
+							.addClass('position_relative')
+					)
+			)
+		);
+		$fNode.append($food_detail = $('<div>').addClass('flex_1'));
+		$food_detail.append($('<h4>').addClass('font_size_16').addClass('line_height_24').addClass('color_000000').addClass('display_flex')
+			.append($('<div>' + $food['name'] + '</div>')));
+		$food_detail.append($('<div>').addClass('padding_top_4').addClass('overflow_hidden')
+			.append($('<div>' + string_limit_length($food['desc'], 72) + '</div>').addClass('font_size_14').addClass('line_height_20').addClass('bx').addClass('color_545454')))
+		$food_detail.append($('<div>').addClass('padding_top_8').addClass('position_relative')
+			.append($('<div>¥' + $food['price'] + '</div>').addClass('font_size_14').addClass('line_height_20').addClass('bx').addClass('color_000000')))
+		if(foods[i]['image']) {
+			$fNode.append($food_image = $('<div>').addClass('height_88').addClass('width_96').addClass('display_flex').addClass('flex_shrink_0'));
+			$food_image.append($('<img>').attr('alt', $food['name']).attr('src', $food['image']).attr('aria-hidden', 'true')
+				.addClass('opacity_1').addClass('height_88').addClass('width_88').addClass('outline_rgba_1').addClass('object_fit_cover').addClass('outline_offset_minus1'));
+		}
+	}
+	return $block;
+}
+
+function list_foods() {
+	var $main = $("main");
+	$main.hide();
+	$main.empty();
+	$main.append($('<header>').html(header = get_header()));
+	$main.append(notificationElement = $('<div></div>').addClass('notification').hide());
+	$main.append(get_alert());
+	$main.append(get_tac());
+	$main.append(get_full_tac());
+	$main.append(get_category_nav_bar());
+	$main.append(
+		$('<div>').addClass('padding_0_16').css('padding-bottom', '50px').append(get_food_block())
+	);
+	$main.append($('<div>').addClass('footer-container').append($cart = $('<div>').addClass('footerButton').click(function() {
+		show_cart_items();
+		update_cart_button();
+	})));
+	$cart.append($('<div>').addClass('cart_total_number'))
+		.append($('<div>')).text(words['c_name'])
+		.append($('<div>').addClass('cart_total_price'))
+	if(Object.keys(cart).length == 0) {
+		$cart.hide();
+	} else {
+		update_cart_button();
+	}
+
+	cartElement = $cart;
+	if(selectedFood) show_food(selectedFood);
+	else if(do_lineup) show_lineup();
+	$main.show();
+}
+
+function regWindowScroll() {
+	navbar = document.getElementById("navbar")
+	sticky = navbar.offsetTop;
+	$(window).scroll({navbar: navbar, sticky: sticky}, function(e) {
+		sticky = e.data.sticky
+		navbar = e.data.navbar
+		if(window.pageYOffset >= sticky) {
+			navbar.classList.add("sticky")
+		} else {
+			navbar.classList.remove("sticky")
+		}
+	})
+}
+
+$(document).ready(function(){
+	if($cart = Cookies.get('cart'))
+		cart = JSON.parse($cart);
+	list_foods();
+	show_tac();
+	regWindowScroll();
+});
+</script>
+<main role="main" class="display_block" style=""><header><div style="display: flex; flex-direction: row; margin-bottom: 0px;"><div style="flex: 0 0 20%; margin: 2px auto;"></div><div style="flex: 0 0 60%; margin: 2px auto; font-size: 18px; padding: 12px 0px; text-align: center;">Powered by LYNKED</div><div style="flex: 0 0 20%; margin: 2px auto;"><div id="userInfo" style="text-align: center; margin: 5px auto; height: 50px; border-radius: 10px; padding: 1px 0px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; background-color: rgb(255, 255, 255);"><div style="background-size: 100% 100%; background-image: url(&quot;/assets/images/Japanese_Lineup.png&quot;); width: 60px; height: 50px;"></div></div></div></div></header><div class="notification" style="display: none;"></div><div id="alert" style="display: none;"><div style="position: fixed; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 10; background-color: rgb(0, 0, 0); opacity: 0.1;"></div><div class="alert"><div id="message" style="text-align: center; margin-bottom: 10px; font-size: 20px;"></div><input type="button" value="OK" style="font-size: 14px;"></div></div><div id="tac-container" style=""><div style="position: fixed; top: 0px; left: 0px; height: 100%; width: 100%; z-index: 20; background-color: rgb(0, 0, 0); opacity: 0.1;"></div><div class="tac"><div style="font-size: 16px; text-align: center; font-weight: bolder; padding: 16px;">Menyのご利用規約について</div><div style="font-size: 16px;">※引き続きサービスを利用するには、ご利用規約に同意していただく必要があります。</div><div style="text-align: center;"><a href="#" style="font-size: 12px; color: rgb(186, 31, 35);">利用規約</a></div><div style="text-align: center;"><a href="#" style="font-size: 12px; color: rgb(186, 31, 35);">TERMS &amp; CONDITIONS</a></div><div style="margin: 20px 0px; display: flex; justify-content: center;"><input type="button" value="同意して予約する" style="font-size: 14px; background-color: rgb(186, 31, 35); color: rgb(255, 255, 255); border: none; padding: 16px;"></div></div></div><div id="tac-link" style="display: none;"><div class="tac-full"><iframe id="showdiv" style="height: 95%; width: 100%; border: none;"></iframe><div style="text-align: center; border: 1px solid rgb(0, 0, 0);">戻る</div></div></div><div id="navbar"><a href="#5f6205647f11c030c1ddf6e9">焼き鳥</a><a href="#5f62060c7f11c030c1ddf8fc">サイドメニュー</a><a href="#5f62064d7f11c030c1ddf942">ドリンク</a><a href="#5f72eea87f11c030c1e15e5c">定番メニュー</a><a href="#5f9661207f11c030c1ea8867">人気物</a><a href="#5f96b1217f11c030c1ea9bc9">お子様メニュー</a><a href="#5f9796dd7f11c030c1eace79">カツ丼</a><a href="#5f98d5157f11c030c1eb0330">麺類2</a><a href="#5f990dc07f11c030c1eb19cc">ピザ</a><a href="#5fa1f7b87f11c030c1ececbc">Testing</a><a href="#5faa079f7f11c030c1eeded1">Ptt</a></div><div class="padding_0_16" style="padding-bottom: 50px;"><ul class="list_style_none"><li class="padding_16_0"><h2 id="5f6205647f11c030c1ddf6e9" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">焼き鳥</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>もも</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">Test</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥200</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="もも" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/momo.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>むねね</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥200</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="むねね" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/mune.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>かわ</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥150</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="かわ" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/kawa.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>やきうどん</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="やきうどん" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakiudon.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>つくね</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥200</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f62060c7f11c030c1ddf8fc" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">サイドメニュー</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>唐揚げ</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="唐揚げ" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/karaage.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>エイヒレ</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="エイヒレ" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/eihire.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>たまご</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="たまご" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/tamago.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>とうもろこし</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="とうもろこし" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/corn.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>もも</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">Nej</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥150</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f62064d7f11c030c1ddf942" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">ドリンク</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>ハイボール</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥500</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="ハイボール" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/high+ball.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>レモンサワー</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥500</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="レモンサワー" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/lemon+sour.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>コーラ1</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥500</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="コーラ1" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/cola.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>ジンジャーエール</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥500</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="ジンジャーエール" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/gingerale.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>オレンジジュース1</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥500</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="オレンジジュース1" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/orange.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>もも</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">Bw </div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥2005</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f72eea87f11c030c1e15e5c" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">定番メニュー</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>チャーハン</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">一番美味しい</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥1000</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f9661207f11c030c1ea8867" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">人気物</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>やきそば</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥300</div></div></div><div class="height_88 width_96 display_flex flex_shrink_0"><img alt="やきそば" src="https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakisoba.jpg" aria-hidden="true" class="opacity_1 height_88 width_88 outline_rgba_1 object_fit_cover outline_offset_minus1"></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>チャーハン</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥990</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f96b1217f11c030c1ea9bc9" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">お子様メニュー</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>test</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">test</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥1000</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f9796dd7f11c030c1eace79" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">カツ丼</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>豚</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">美味しい</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥1000</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f98d5157f11c030c1eb0330" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">麺類2</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>焼きそば3</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">22</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥400</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5f990dc07f11c030c1eb19cc" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">ピザ</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>マーガレット222’e</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥10001567</div></div></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>Ress</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454"></div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥10000</div></div></div></div></div></li><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_1 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>ppppvgbn</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">123</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥1111</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5fa1f7b87f11c030c1ececbc" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">Testing</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>Kt,tm</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">Kemw</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥12</div></div></div></div></div></li></ul></li><li class="padding_16_0"><h2 id="5faa079f7f11c030c1eeded1" class="font_size_20 line_height_24 color_000000" style="padding: 10px 0px; margin: 0px;">Ptt</h2><ul class="margin_bottom_16"><li class="overflow_hidden"><div tabindex="0" class="text_decoration_none"><div class="border_top_0 display_flex padding_16_0 position_relative"><div class="flex_1"><h4 class="font_size_16 line_height_24 color_000000 display_flex"><div>Jak</div></h4><div class="padding_top_4 overflow_hidden"><div class="font_size_14 line_height_20 bx color_545454">Nn</div></div><div class="padding_top_8 position_relative"><div class="font_size_14 line_height_20 bx color_000000">¥900</div></div></div></div></div></li></ul></li></ul></div><div class="footer-container"><div class="footerButton" style="display: none;">カート<div class="cart_total_price"></div></div></div></main>
+
+
+</body></html>

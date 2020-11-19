@@ -1,0 +1,1119 @@
+<html><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" data-rh="true">
+	<link rel="stylesheet" href="/assets/css/lynked.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+.root {
+	display:block;
+	position: absolute;
+	left: 50vw;
+	transform: translateX(-50%);
+	background-color: #f8f8f8;
+	width: 100vw;
+}
+.container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	justify-content: space-around;
+}
+.order_container {
+	margin: 2%;
+	min-width: 96%;
+	padding: 5px;
+	border: 2px solid #00f;
+	position: relative;
+}
+.order-info {
+	margin-bottom: 10px;
+}
+.time {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: #000;
+	color: #0f0;
+	font-size: 16px;
+}
+.order-list {
+	box-sizing: border-box;
+	border: 1px solid #000;
+	padding: 2px;
+}
+.font-size-small {
+	font-size: small;
+}
+.item-container {
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+.container div {
+	margin-bottom: 0px;
+}
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 40%;
+	height: auto;
+	z-index: 1;
+	background-color: #F4A460;
+	overflow: scroll;
+	text-align: center;
+	padding: 10;
+}
+.notification {
+	position: fixed;
+	left: 0;
+	right: 0;
+	margin: auto;
+	margin-top: 0;
+	width: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000000;
+	color: #FFFFCC;
+	opacity:0.7;
+	z-index: 99;
+}
+.bill-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 5px 0;
+}
+.deliver-control, .cancel-control {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.deliver-control {
+	background-color: #b0e0e6;
+	padding-left: 2%;
+}
+.update-button {
+	width: auto !important;
+	margin-right: 5px !important;
+	color: #fff !important;
+	height: 24px !important;
+	font-size: 20px !important;
+	line-height: 20px !important;
+}
+.food-top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background-color: #fff;
+	justify-content: center;
+	align-items: center;
+	overflow: scroll;
+}
+* {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+input,textarea {
+
+    -webkit-user-select: text !important;
+}
+	</style>
+	<script>
+	var words = {
+		a_f_category: "カテゴリー:",
+		a_f_category_config: "Category Configuration",
+		a_f_create: "Create",
+		a_f_create_category: "Create New Category",
+		a_f_create_food: "Create New Food",
+		a_f_delete: "削除",
+		a_f_description: "詳細:",
+		a_f_edit: "編集",
+		a_f_food_config: "Food Configuration",
+		a_f_foodname: "名前:",
+		a_f_image: "画像:",
+		a_f_warning: "Please create Category first",
+		a_f_price: "値段:",
+		a_f_search: "カテゴリーの検索",
+		a_f_set: "セット",
+		a_l_adult: "大人: ",
+		a_l_child: "子供: ",
+		a_l_name: "名前: ",
+		a_l_seat_n: "未確定",
+		a_l_set: "セット",
+		a_o_all: "全て",
+		a_o_cancel: "キャンセル",
+		a_o_created: "作成日:",
+		a_o_customer: "お客様名: ",
+		a_o_delivered: "提供済み",
+		a_o_preparing: "準備中",
+		a_o_finish: "の会計を完了しましたか？",
+		a_o_search: "テーブルの検索",
+		a_o_table: "席 ",
+		a_s_back: "戻る",
+		a_s_bill: "会計管理",
+		a_s_fcontrol: "メニュー管理",
+		a_s_lineups: "席の予約管理",
+		a_s_orders: "オーダー管理",
+		o_subtotal: "小計:",
+		o_service: "サービス料",
+		o_tax: "消費税",
+		o_total: "合計",
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	var cats = [{"cid":"5f6205647f11c030c1ddf6e9","rid":null,"name":"焼き鳥","foods":[{"fid":"5f6205657f11c030c1ddf6f2","rid":"5f6200b97f11c030c1ddf576","name":"もも","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/momo.jpg","desc":"Test","price":200,"order":0},{"fid":"5f6205d47f11c030c1ddf8d6","rid":"5f6200b97f11c030c1ddf576","name":"むねね","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/mune.jpg","desc":"","price":200,"order":0},{"fid":"5f6205e07f11c030c1ddf8e6","rid":"5f6200b97f11c030c1ddf576","name":"かわ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/kawa.jpg","desc":"","price":150,"order":0},{"fid":"5f62063b7f11c030c1ddf938","rid":"5f6200b97f11c030c1ddf576","name":"やきうどん","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakiudon.jpg","desc":"","price":300,"order":0},{"fid":"5f85220c7f11c030c1e6acd6","rid":"5f6200b97f11c030c1ddf576","name":"つくね","image":"","desc":"","price":200,"order":0}],"order":0},{"cid":"5f62060c7f11c030c1ddf8fc","rid":null,"name":"サイドメニュー","foods":[{"fid":"5f62060d7f11c030c1ddf908","rid":"5f6200b97f11c030c1ddf576","name":"唐揚げ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/karaage.jpg","desc":"","price":300,"order":0},{"fid":"5f6206227f11c030c1ddf914","rid":"5f6200b97f11c030c1ddf576","name":"エイヒレ","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/eihire.jpg","desc":"","price":300,"order":0},{"fid":"5f62062b7f11c030c1ddf91c","rid":"5f6200b97f11c030c1ddf576","name":"たまご","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/tamago.jpg","desc":"","price":300,"order":0},{"fid":"5f6206317f11c030c1ddf926","rid":"5f6200b97f11c030c1ddf576","name":"とうもろこし","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/corn.jpg","desc":"","price":300,"order":0},{"fid":"5fa4a71c7f11c030c1ed98bf","rid":"5f6200b97f11c030c1ddf576","name":"もも","image":"","desc":"Nej","price":150,"order":0}],"order":0},{"cid":"5f62064d7f11c030c1ddf942","rid":null,"name":"ドリンク","foods":[{"fid":"5f62064f7f11c030c1ddf94d","rid":"5f6200b97f11c030c1ddf576","name":"ハイボール","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/high+ball.jpg","desc":"","price":500,"order":0},{"fid":"5f62066a7f11c030c1ddf95c","rid":"5f6200b97f11c030c1ddf576","name":"レモンサワー","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/lemon+sour.jpg","desc":"","price":500,"order":0},{"fid":"5f6206717f11c030c1ddf965","rid":"5f6200b97f11c030c1ddf576","name":"コーラ1","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/cola.jpg","desc":"","price":500,"order":0},{"fid":"5f6206887f11c030c1ddf974","rid":"5f6200b97f11c030c1ddf576","name":"ジンジャーエール","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/gingerale.jpg","desc":"","price":500,"order":0},{"fid":"5f6206937f11c030c1ddf97f","rid":"5f6200b97f11c030c1ddf576","name":"オレンジジュース1","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/orange.jpg","desc":"","price":500,"order":0},{"fid":"5fa4a8a27f11c030c1ed9999","rid":"5f6200b97f11c030c1ddf576","name":"もも","image":"","desc":"Bw ","price":2005,"order":0}],"order":0},{"cid":"5f72eea87f11c030c1e15e5c","rid":null,"name":"定番メニュー","foods":[{"fid":"5f72eea87f11c030c1e15e68","rid":"5f6200b97f11c030c1ddf576","name":"チャーハン","image":"","desc":"一番美味しい","price":1000,"order":0}],"order":0},{"cid":"5f9661207f11c030c1ea8867","rid":null,"name":"人気物","foods":[{"fid":"5f6206377f11c030c1ddf930","rid":"5f6200b97f11c030c1ddf576","name":"やきそば","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/yakisoba.jpg","desc":"","price":300,"order":0},{"fid":"5f9661257f11c030c1ea8874","rid":"5f6200b97f11c030c1ddf576","name":"チャーハン","image":"","desc":"","price":990,"order":0}],"order":0},{"cid":"5f9661447f11c030c1ea8883","rid":null,"name":"丼","foods":null,"order":0},{"cid":"5f96b1217f11c030c1ea9bc9","rid":null,"name":"お子様メニュー","foods":[{"fid":"5f96b1267f11c030c1ea9bd8","rid":"5f6200b97f11c030c1ddf576","name":"test","image":"","desc":"test","price":1000,"order":0}],"order":0},{"cid":"5f9796dd7f11c030c1eace79","rid":null,"name":"カツ丼","foods":[{"fid":"5f9796e17f11c030c1eace89","rid":"5f6200b97f11c030c1ddf576","name":"豚","image":"","desc":"美味しい","price":1000,"order":0}],"order":0},{"cid":"5f98d5157f11c030c1eb0330","rid":null,"name":"麺類2","foods":[{"fid":"5f98d5177f11c030c1eb0343","rid":"5f6200b97f11c030c1ddf576","name":"焼きそば3","image":"","desc":"22","price":400,"order":0}],"order":0},{"cid":"5f990dc07f11c030c1eb19cc","rid":null,"name":"ピザ","foods":[{"fid":"5f990dc07f11c030c1eb19cf","rid":"5f6200b97f11c030c1ddf576","name":"マーガレット222’e","image":"","desc":"","price":10001567,"order":0},{"fid":"5f990dc87f11c030c1eb19e0","rid":"5f6200b97f11c030c1ddf576","name":"Ress","image":"","desc":"","price":10000,"order":0},{"fid":"5f9bc0e27f11c030c1ebd3ba","rid":"5f6200b97f11c030c1ddf576","name":"ppppvgbn","image":"","desc":"123","price":1111,"order":0}],"order":0},{"cid":"5fa1f7b87f11c030c1ececbc","rid":null,"name":"Testing","foods":[{"fid":"5fa1f8467f11c030c1ececea","rid":"5f6200b97f11c030c1ddf576","name":"Kt,tm","image":"","desc":"Kemw","price":12,"order":0}],"order":0},{"cid":"5fa3505a7f11c030c1ed4df5","rid":null,"name":"カテゴリー新しい","foods":null,"order":0},{"cid":"5fa4ac437f11c030c1ed9b80","rid":null,"name":"EditNew","foods":null,"order":0},{"cid":"5fa9ffe87f11c030c1eed9ec","rid":null,"name":"Testting@¥","foods":null,"order":0},{"cid":"5faa079f7f11c030c1eeded1","rid":null,"name":"Ptt","foods":[{"fid":"5faa07cc7f11c030c1eedf03","rid":"5f6200b97f11c030c1ddf576","name":"Jak","image":"","desc":"Nn","price":900,"order":0}],"order":0},{"cid":"5faa087a7f11c030c1eedf49","rid":null,"name":"qqa","foods":null,"order":0},{"cid":"5faa8c757f11c030c1ef0c3d","rid":null,"name":"変更","foods":null,"order":0},{"cid":"5fb487de7f11c030c1f1c90b","rid":null,"name":"a","foods":null,"order":0},{"cid":"5fb4eacc7f11c030c1f1f968","rid":null,"name":"new category","foods":null,"order":0},{"cid":"5fb5349f7f11c030c1f2103e","rid":null,"name":"louis category","foods":[{"fid":"5fb535397f11c030c1f21095","rid":"5f6200b97f11c030c1ddf576","name":"louis food","image":"https://danielcyj.s3-ap-southeast-1.amazonaws.com/momo.jpg","desc":"","price":10,"order":0}],"order":0},{"cid":"5fb632807f11c030c1f256ae","rid":null,"name":"tkっh、skdm","foods":null,"order":0}];
+	var cats_now = cats;
+	var lineups;
+	var image_url;
+	var home = "order";
+	var orderInterval = null;
+	var orders;
+	var orders_now;
+	var foods;
+	var currencySymbol = '¥'
+	var service_pct;
+	var tax_pct = 10;
+	var notificationElement;
+	var notificationTimer = null;
+	var DELAY = 1000;
+	var dbClickTimer = null;
+	var timeout;
+	var mouse_down_time;
+	function show_notification(message) {
+		if(notificationTimer)
+			clearInterval(notificationTimer);
+		notificationElement.html(message);
+		notificationElement.show();
+		notificationTimer = setInterval(function() {
+			notificationElement.hide();
+			clearInterval(notificationTimer);
+			notificationTimer = null;
+		}, 4000);
+	}
+	function show_input(e) {
+		e.stopPropagation();
+		input_table = $('#' + e.data.type + '_input_table')
+		if(input_table.length) return;
+		topElement = get_top_element();
+		switch(e.data.type) {
+			case "category":
+				topElement.append(get_category_input_table(e.data.set_name)); break;
+			case "food":
+				topElement.append(get_food_input_table(e.data.set_name)); break;
+		}
+		$("main").append(topElement);
+	}
+	function get_admin_category_table() {
+		category_table = $('#category_table');
+		if(0 == category_table.length) {
+			category_table = $('<table id="category_table">').addClass('table_search');
+		}
+		category_table.empty();
+		if(null == cats_now) return category_table;
+		cats_now.forEach(function(category) {
+			category_table.append(
+				$('<tr>')
+				.append($('<td>' + category['name'] + '</td>'))
+				.append($('<td>')
+					.append(
+						$('<input>').addClass('edit_food').attr('type', 'button').attr('value', words['a_f_edit'])
+						.click({category: category, set_name: words['a_f_edit'], type: 'category'}, function(e) {
+							show_input(e);
+							category = e.data.category;
+							$('input[name="category"]').val(category.name);
+							$('input[name="id"]').val(category.cid);
+						})
+					)
+				)
+			)
+		})
+		return category_table;
+	}
+	function get_admin_food_table() {
+		food_table = $('#food_table');
+		if(0 == food_table.length) {
+			food_table = $('<table id="food_table">').addClass('table_search');
+		}
+		food_table.empty();
+		if(null == cats_now) return food_table;
+		cats_now.forEach(function(category) {
+			if(null == category['foods']) return;
+			food_table.append('\t\t\t\t<tr><td class="rtd" colspan=3>' + category['name'] + '</td></tr>');
+			category['foods'].forEach(function(food) {
+				food.category = category.name;
+				food_table.append(
+					$('<tr>')
+					.append($('<td>'))
+					.append($('<td>' + food['name'] + '</td>').addClass('rtd'))
+					.append($('<td>')
+							.append(
+								$('<input>').addClass('edit_food').attr('type', 'button').attr('value', words['a_f_edit'])
+								.click({food: food, set_name: words['a_f_edit'], type: 'food'}, function(e) {
+									show_input(e);
+									food = e.data.food;
+									$('select[name="category"]').val(food.category);
+									$('input[name="name"]').val(food.name);
+									$('input[name="image"]').val(food.image);
+									$('input[name="image"]').trigger('change');
+									$('input[name="desc"]').val(food.desc);
+									$('input[name="price"]').val(food.price);
+									$('input[name="id"]').val(food.fid);
+								})
+							)
+							.append(
+								$('<input>').addClass('delete_food').attr('type', 'button').attr('value', words['a_f_delete'])
+								.click(food, function(e) {
+									food = e.data;
+									if(confirm("Delete " + food.name + " ?"))
+									{
+										$.post( "delete", JSON.stringify({ fid: food.fid }), function( data ) {
+											cats_now = cats = data;
+											get_admin_food_table();
+										});
+									}
+								})
+							)
+						)
+				);
+			});
+		})
+		return food_table;
+	}
+
+	function get_input_set(text_string, attr_name, element) {
+		input_set = $('<div>')
+		input_set.css('display', 'flex').css('flex-direction', 'row').css('margin', '2 auto').css('padding', '2').css('align-items', 'center')
+		.append($('<div>').text(text_string).css('flex', '0 0 30%').css('margin', '2 auto'))
+		.append(
+			$('<div>').css('flex', '0 0 70%').css('margin', '2 auto')
+			.append(
+				$('<' + element + '>').css('width', '95%').css('margin-left', '2.5%').attr('name', attr_name)
+			)
+		)
+		return input_set
+	}
+
+	function get_food_input_table(set_name) {
+		console.log('get_food_input_table')
+		table = $('<div>').attr('id', 'food_input_table').css('width', '90%').css('margin-top', '80').css('margin-bottom', '15').css('font-size', '16px').css('margin-left', '5%').css('border-radius', '10px').css('background-color', '#8FBC8F');
+		table.append(category_set = get_input_set(words['a_f_category'], 'category', 'select'));
+		if(cats) {
+			cats.forEach(function(category) {
+				category_set.children().children('select').append($('<option>', {value:category['name'], text:category['name']}))
+			});
+		}
+		table.append(get_input_set(words['a_f_foodname'], 'name', 'input'));
+		table.append(get_input_set(words['a_f_description'], 'desc', 'input'));
+		table.append(price_set = get_input_set(words['a_f_price'], 'price', 'input'));
+		price_set.children().children('input').attr('type', 'number')
+		table.append(image_set = get_input_set(words['a_f_image'], 'image', 'input'));
+		image_set.children().children('input').change(function() {
+			if(image_url != $(this).val()) {
+				$('#food_image_placeholder').hide();
+				$('#food_image_placeholder').attr('src', $(this).val());
+				image_url = $(this).val()
+			}
+		}).keyup(function(e) { $(this).trigger('change'); })
+		table.append(get_input_set('', 'id', 'input').hide());
+		table.append($('<div>').css('width', '100%').append(
+				$('<img id="food_image_placeholder">').css('max-width', '100%')
+					.on("error", function() {
+						$(this).hide();
+						$(this).attr('src', '')
+					})
+					.on("load", function() { $(this).show(); })
+					.hide()
+			)
+		);
+		table.append(
+				$('<div>').css('width', '100%').css('padding', 5).append(
+					$('<div>').text(set_name)
+						.css('width', '90%').css('border-style', 'solid').css('text-align', 'center').css('margin', '0 auto').css('background-color', '#5F2024').css('color', '#FFFFFF')
+				).click(table, function(e) {
+					food_config = {}
+					food_config.cname = $('select[name="category"]').val()
+					food_config.fname = $('input[name="name"]').val()
+					food_config.desc  = $('input[name="desc"]').val()
+					food_config.price = $('input[name="price"]').val()
+					food_config.image = $('input[name="image"]').val()
+					if($('input[name="id"]').val())
+						food_config.fid = $('input[name="id"]').val()
+					$.ajax({
+						type: 'POST',
+						url: 'food',
+						data: JSON.stringify(food_config),
+						processData: false,
+						contentType: false,
+						success: function(data){
+							cats_now = cats = data;
+							topElement.remove();
+							get_admin_food_table();
+						},
+						error: function(jqXHR, status, errorThrown){
+							show_notification('<p><strong>' + jqXHR.responseText + '</strong></p>');
+						}
+					});
+				})
+			);
+		return table;
+	}
+
+	function get_category_input_table(set_name) {
+		table = $('<div>').attr('id', 'category_input_table').css('width', '90%').css('margin-top', '80').css('margin-bottom', '15').css('font-size', '16px').css('margin-left', '5%').css('border-radius', '10px').css('background-color', '#8FBC8F');
+		table.append(get_input_set(words['a_f_category'], 'category', 'input'));
+		table.append(get_input_set('', 'id', 'input').hide());
+		table.append(
+				$('<div>').css('width', '100%').css('padding', 5).append(
+					$('<div>').text(set_name)
+						.css('width', '90%').css('border-style', 'solid').css('text-align', 'center').css('margin', '0 auto').css('background-color', '#5F2024').css('color', '#FFFFFF')
+				).click(table, function(e) {
+					category_config = {}
+					category_config.name = $('input[name="category"]').val()
+					if($('input[name="id"]').val())
+						category_config.cid = $('input[name="id"]').val()
+					$.ajax({
+						type: 'POST',
+						url: 'category',
+						data: JSON.stringify(category_config),
+						processData: false,
+						contentType: false,
+						success: function(data){
+							if (null == cats) {
+								$('#admin_food_warning').hide()
+								$('#admin_food').show()
+							}
+							cats_now = cats = data;
+							topElement.remove();
+							get_admin_category_table();
+							get_admin_food_table();
+						},
+						error: function(jqXHR, status, errorThrown){
+							show_notification('<p><strong>' + jqXHR.responseText + '</strong></p>');
+						}
+					});
+				})
+			);
+		return table;
+	}
+	function get_food_category_search() {
+		search = $('<div>').css('width', '100%');
+		search.append(
+			$('<input>').attr('placeholder', words['a_f_search']).css('width', '90%').css('margin-left', '5%').keyup(
+				function(e) {
+					var filter_value = $(this).val().toLowerCase();
+					if (filter_value == "") {
+						cats_now = cats;
+					} else {
+						cats_now = [];
+						cats.forEach(function(category) {
+							if(category['name'].toLowerCase().includes(filter_value)) {
+								cats_now.push(category);
+							}
+						});
+					}
+					get_admin_food_table();
+				})
+			);
+		return search;
+	}
+
+
+	function get_admin_lineup() {
+		if(null == lineups) return;
+		var index = 0;
+		lineup_holder = $('<div>').css('width', '100%');
+		lineups.forEach(function(lineup) {
+			index++;
+			lineupElement = $('<div>').css('width', '90%').css('margin-bottom', '15').css('font-size', '16px').css('margin-left', '5%');
+			lineupElement.append(
+				$('<div>').css('display', 'flex').css('flex-direction', 'row').css('margin-bottom', '0px')
+					.append(
+						$('<div>').text(words['a_l_name'] + lineup['name']).css('flex-grow', 2).css('background-color', '#CCCCCC').css('margin-bottom', 0)
+					)
+					.append(
+						$('<div>' + words['a_l_adult'] +
+							(lineup['adult']?lineup['adult']:0) +
+							' / ' + words['a_l_child'] +
+							(lineup['child']?lineup['child']:0)+
+							'</div>').css('flex-grow', 3).css('background-color', '#CCCCCC').css('margin-bottom', 0)
+					)
+			);
+
+			if(lineup['note']) {
+				lineupElement.append($('<div>Note: ' + lineup['note'] + '</div>').css('margin-bottom', '0px').css('background-color', '#FFF0FF'));
+			}
+			seat = $('<div>').css('margin-bottom', '0px').attr('lid', lineup['lid']);
+			if(lineup['seat']) {
+				seat.html(lineup['seat']);
+				seat.css('background-color', '#03FCC0');
+			} else {
+				seat.html(words['a_l_seat_n']);
+				seat.css('background-color', '#FF4800')
+
+				lineupElement.click({lineup:lineup, element:lineupElement}, function(e) {
+					$("#seat_management").remove();
+					topOffset = e.pageY + 20;
+					if(topOffset + 150 > window.screen.availHeight)
+						topOffset = window.screen.availHeight - 150;
+					main.append(
+						$('<div id="seat_management">').addClass('seat_management')
+							.css('top', topOffset)
+							.css('padding', '0px 10px')
+							.append(
+								$('<div>' + e.data.lineup.name + '</div>')
+							)
+							.append(
+								$('<input id="seat_number">').css('width', '95%').css('margin', '5')
+								.keyup(function() { $('#seat_warning').text('') })
+							)
+							.append(
+								$('<div id="seat_warning">').css('color', '#CD5C5C')
+							)
+							.append(
+								$('<input type="button">').val(words['a_l_set']).css('width', '95%').css('margin-bottom', '10').click(e.data, function(e) {
+									if($('#seat_number').val().length == 0) {
+										$('#seat_warning').text('Seat can\'t be empty');
+										return;
+									}
+									$.post("lineup", JSON.stringify({lid: e.data.lineup.lid, seat: $('#seat_number').val()}), function(data) {
+										e.data.element.unbind();
+										seatElement = $('[lid="' + data['lid'] + '"]');
+										seatElement.html(data['seat']);
+										seatElement.css('background-color', '#03FCC0');
+										$('#seat_management').remove();
+									}, "json");
+								})
+							).click(function(e) {
+								e.stopPropagation();
+							})
+					);
+					$('#seat_number').focus();
+					e.stopPropagation();
+				});
+			}
+			lineupElement.append(seat);
+			lineup_holder.append(lineupElement);
+		});
+		return lineup_holder;
+	}
+
+	function update_pending_time() {
+		$('div.update_time').each(function () {
+			var now = new Date().getTime();
+			var start = parseInt($(this).attr("data-create"));
+			var spand = parseInt((now - start) / 1000);
+			var hour = Math.floor(spand / 3600);
+			if(hour<10) hour="0"+hour;
+			var minute = Math.floor(Math.floor(spand % 3600) / 60);
+			if(minute<10) minute="0"+minute;
+			var second = spand % 60;
+			if(second<10) second="0"+second;
+			$(this).text(hour + ":" + minute + ":" + second);
+		});
+	}
+
+	function get_quantity(item) {
+		let quantity;
+		if(!item['quantity'])
+			quantity = 1;
+		else
+			quantity = item['quantity'];
+		return quantity
+	}
+
+	function stopEvent(e) {
+		e.stopPropagation();
+	}
+
+	function updateOrder(e) {
+		e.stopPropagation();
+		$(".deliver-control").hide();
+		let item = e.data.item;
+		let ready = e.data.ready;
+		let quantity = e.data.quantity;
+		let order_insert = {
+			oid: e.data.oid,
+			iid: item['id'],
+			quantity: quantity,
+		}
+		if (ready == (get_quantity(item) - quantity)) {
+			order_insert.ready = true
+		}
+		$.post("order", JSON.stringify(order_insert), function (data) {
+			orders_now = orders = data;
+			get_admin_order();
+			update_pending_time();
+		}, "json");
+	}
+
+	function itemClick(e) {
+		$(".deliver-control").hide();
+		$(".cancel-control").hide();
+		$(this).children('.deliver-control').toggle();
+		e.stopPropagation();
+	}
+
+	function is_touchable() {
+		if ("ontouchstart" in document.documentElement)
+			return true;
+		return false;
+	}
+
+	function touchStart(e) {
+		$(".cancel-control").hide();
+		$(".deliver-control").hide();
+		mouse_down_time = new Date().getTime();
+		let $this = $(this);
+		timeout = setTimeout(function() {
+			$this.children('.cancel-control').toggle();
+		}, DELAY)
+	}
+
+	function touchEnd(e) {
+		let press_time = new Date().getTime() - mouse_down_time;
+		if(press_time < DELAY) {
+			clearTimeout(timeout);
+			$(this).children('.deliver-control').toggle();
+		}
+	}
+
+	function get_admin_order() {
+		order_holder = $('#orders');
+		if(0 == order_holder.length) {
+			order_holder = $('<div id="orders">').addClass('container');
+		}
+		order_holder.empty();
+		if(null == orders_now || null == lineups) return;
+		if(orderInterval) clearInterval(orderInterval);
+		var guest_name = {};
+		var food_by_id = {};
+		lineups.forEach(function (lineup) {
+			if(lineup['seat'])
+				guest_name[lineup['lid']] = words['a_o_table'] + lineup['seat'];
+			else
+				guest_name[lineup['lid']] = 'No: ' + lineup['number'];
+		});
+		foods.forEach(function (food) {
+			food_by_id[food['fid']] = food;
+		});
+		for(var index = 0;index < orders_now.length;index++) {
+			var order = orders_now[index];
+			var created_time = new Date(order['created'])
+			var info_string = guest_name[order['lid']]?guest_name[order['lid']]:'';
+			order_holder.append($order_container = $('<div>').addClass('order_container'))
+			time = $('<div>').addClass('time')
+			if(order['delivered']) {
+				$order_container.css('order', '1')
+				time.text(words['a_o_delivered'])
+				time.css('background-color', '#1E90FF')
+				time.css('color', '#fff')
+			} else {
+				time.attr('id', order['oid'])
+				time.attr('data-create', order['created'])
+				time.addClass('update_time');
+			}
+			$order_container.append($order_info = $('<div>').addClass('order-info'))
+			$order_info
+				.append($('<div>' + info_string + '</div>'))
+				.append($('<div>').text(words['a_o_created'] + created_time.toLocaleString()).addClass('font-size-small'))
+				.append(time)
+			$order_container.append($order_list = $('<div>').addClass('order-list'))
+			var item_index = 0;
+			order['items'].forEach(function (item) {
+				item_index++;
+				var ready_amount = 0;
+				$order_list.append($item_container = $('<div>').addClass('item-container').css('margin', '5px 0').css('padding', '5px 0').css('background-color', '#ffeeed'));
+				if(item['cancel']) {
+					$item_container.append(
+						$('<div>' + item_index + '.' + food_by_id[item['fid']]['name'] + '</div>')
+						.css('text-decoration', 'line-through')
+					)
+					return
+				}
+				if(item['ready']) {
+					ready_amount = item['ready'].length;
+					$item_container.css('background-color', '#e3e3e3');
+				}
+				$item_container
+				.append($('<div>' + item_index + '.' + food_by_id[item['fid']]['name'] + '</div>'))
+				.append(
+					$('<div>x' + get_quantity(item) + '(' + ready_amount + '/' + get_quantity(item) + ')</div>')
+					.css('padding-left', '2px')
+				)
+				.append($deliver_container = $('<div>').addClass('deliver-control').hide())
+				$deliver_container.append($('<div>').text(words['a_o_delivered']).css('margin-right', '5px').css('font-size', '20px'))
+				$deliver_container.append($('<input>').attr('type', 'button').attr('value', '1').addClass('update-button')
+					.attr('style', 'background-color: #1E90FF !important')
+					.bind('click', {
+						quantity: 1,
+						ready: ready_amount,
+						oid: orders_now[index]['oid'],
+						item: item,
+					},updateOrder)
+				)
+				if (get_quantity(item) > 1) {
+					$deliver_container.append($('<input>').attr('type', 'button').attr('value', words['a_o_all']).addClass('update-button')
+						.attr('style', 'background-color: #1E90FF !important')
+						.bind('click', {
+							quantity: get_quantity(item) - ready_amount,
+							ready: ready_amount,
+							oid: orders_now[index]['oid'],
+							item: item,
+						}, updateOrder)
+					)
+				}
+				$deliver_container.bind('touchstart touchend mousedown mouseup click', stopEvent)
+				if (ready_amount < get_quantity(item) && ready_amount == 0) {
+					$item_container.append(
+						$cancel_container = $('<div>').addClass('cancel-control').hide()
+					)
+					$cancel_container.append($('<input>').attr('type', 'button').attr('value', words['a_o_cancel']).addClass('update-button')
+						.attr('style', 'background-color: #F00 !important; margin-right: 0 !important')
+						.bind('click', {
+							quantity: 0,
+							ready: ready_amount,
+							oid: orders_now[index]['oid'],
+							item: item,
+						}, updateOrder)
+					)
+					$cancel_container.bind('touchstart touchend mousedown mouseup click', stopEvent)
+					if(is_touchable()) {
+						$item_container.bind('touchstart', touchStart)
+						$item_container.bind('touchend', touchEnd)
+					} else {
+						$item_container.bind('mousedown', touchStart)
+						$item_container.bind('mouseup', touchEnd)
+					}
+					$item_container.bind('click', stopEvent)
+				} else if (ready_amount < get_quantity(item) && ready_amount != 0) {
+					$item_container.bind('click', itemClick)
+				}
+			})
+		}
+		orderInterval = setInterval(update_pending_time, 1000);
+		order_holder.click(function() {
+			$(".deliver-control").hide();
+			$(".cancel-control").hide();
+		});
+		return order_holder;
+	}
+
+	function get_order_table_search(page) {
+		search = $('<div>').css('width', '100%');
+		search.append(
+			$('<input>').attr('placeholder', words['a_o_search']).attr('list', 'tables').attr('autocomplete', 'off')
+			.css('width', '80%').css('height', '30px').css('margin-left', '10%')
+			.append(table_datalist = $('<datalist id="tables">'))
+			.keyup(function(e) {
+					var filter_value = $(this).val().toLowerCase();
+					if (filter_value == "") {
+						orders_now = orders;
+					} else {
+						orders_now = [];
+						lineups.forEach(function(lineup) {
+							if(!lineup['seat']) return;
+							if(lineup['seat'].toLowerCase() == filter_value) {
+								orders.forEach(function(order) {
+									if(order['lid'] == lineup['lid'])
+										orders_now.push(order);
+								})
+							}
+						});
+					}
+					switch(page) {
+						case "bill": get_admin_bill(); break;
+						case "order": get_admin_order(); break;
+						default: break;
+					}
+				})
+			);
+		if(lineups) {
+			let table_name = [];
+			lineups.forEach(function(lineup) {
+				if(!table_name[lineup['seat']]) {
+					table_name[lineup['seat']] = 1;
+					table_datalist.append($('<option value="' + lineup['seat'] + '">'))
+				}
+			});
+		}
+		return search;
+	}
+
+	function get_admin_bill() {
+		bill_holder = $('#bills')
+		if(0 == bill_holder.length) {
+			bill_holder = $('<div id="bills">').addClass('container');
+		}
+		bill_holder.empty();
+		if(null == orders_now || null == lineups) return;
+		var guest_name = {};
+		var lineup_by_id = {};
+		var food_by_id = {};
+		var user_summary = {};
+		var user_total = {};
+		lineups.forEach(function (lineup) {
+			if(lineup['seat'])
+				guest_name[lineup['lid']] = words['a_o_table'] + lineup['seat'];
+			else
+				guest_name[lineup['lid']] = 'No: ' + lineup['number'];
+			lineup_by_id[lineup['lid']] = lineup;
+		});
+		foods.forEach(function (food) {
+			food_by_id[food['fid']] = food;
+		});
+		orders_now.forEach(function (order) {
+			var created_time = new Date(order['created']);
+			if(user_total[order['lid']] === undefined) user_total[order['lid']] = 0
+			if((user_frame = user_summary[order['lid']]) === undefined) {
+				var info_string = guest_name[order['lid']]?guest_name[order['lid']]:'';
+				var lid = order['lid'];
+				bill_holder.append(
+					user_frame = user_summary[order['lid']] = $('<div>').addClass('order_container')
+					.append(
+						$('<div>').addClass('order-info')
+						.append($('<div>' + info_string + '</div>'))
+						.append($('<div>' + words['a_o_customer'] + lineup_by_id[order['lid']]['name'] + '</div>'))
+					)
+					.append($('<div>').addClass('item'))
+					.append($('<div>').addClass('bill-item')
+						.append($('<span>').text(words['o_subtotal']))
+						.append($('<span>').addClass('order-price'))
+					)
+					.append($('<div>').addClass('bill-item').css('border-bottom', '1px solid #000')
+						.append($('<span>').text(words['o_service'] + '(' + service_pct + '%):'))
+						.append($('<span>').addClass('service-charge'))
+					)
+					.append($('<div>').addClass('bill-item')
+						.append($('<span>'))
+						.append($('<span>').addClass('subtotal'))
+					)
+					.append($('<div>').addClass('bill-item').css('border-bottom', '1px solid #000')
+						.append($('<span>').text(words['o_tax'] + '(' + tax_pct + '%):'))
+						.append($('<span>').addClass('tax'))
+					)
+					.append($('<div>').addClass('bill-item')
+						.append($('<span>').text(words['o_total']))
+						.append($('<span>').addClass('price'))
+					)
+				);
+				user_frame.click(function() {
+					if(confirm(info_string + words['a_o_finish'])) {
+						$.post("bill", JSON.stringify({lid: lid}), function(data) {
+							orders_now = orders = data;
+							get_admin_bill();
+						}, "json");
+					}
+				})
+			}
+			user_frame.children(".item")
+				.append($order_info = $('<div>').css('display', 'flex').css('justify-content', 'space-between').css('margin-top', '5px')
+					.append($('<div>' + created_time.toLocaleString() + '</div>').addClass('font-size-small'))
+					.append(time = $('<div>'))
+				)
+				.append($order_list = $('<div>').addClass('order-list'));
+			var item_index = 0;
+			var order_total = 0;
+			var order_finish = true;
+			var all_cancel = true;
+			order['items'].forEach(function (item) {
+				item_index++;
+				$order_list.append($item_container = $('<div>').addClass('item-container'))
+				if(item['cancel']) {
+					$item_container.append(
+						$('<div>' + item_index + '. ' + food_by_id[item['fid']]['name'] + '</div>')
+						.css('text-decoration', 'line-through')
+					)
+					return
+				}
+				if(order_finish == false || item['amount'] == 0)
+					order_finish = false
+				all_cancel = false
+				$item_container
+				.append(
+					$('<div>' + item_index + '. ' + food_by_id[item['fid']]['name'] + '</div>').css('flex-basis', '80%').css('border-right', '1px solid #000')
+				)
+				.append(
+					$('<div>' + food_by_id[item['fid']]['price'] + '</div>').css('flex-basis', '14%').css('text-align', 'right')
+				)
+				.append(
+					$('<div>x' + get_quantity(item) + '</div>').css('flex-basis', '6%').css('text-align', 'right')
+				)
+				var total = user_total[order['lid']]?user_total[order['lid']]:0;
+				total += food_by_id[item['fid']]['price'] * get_quantity(item);
+				order_total += food_by_id[item['fid']]['price'] * get_quantity(item);
+				user_total[order['lid']] = total;
+			});
+			if(!all_cancel && !order_finish) {
+				time.text(words['a_o_preparing']).css('background-color', '#DC143C').css('color', '#fff')
+			}
+			var service_charge = Math.floor(user_total[order['lid']]*service_pct/100)
+			var subtotal = user_total[order['lid']] + service_charge
+			var tax = Math.floor(subtotal*tax_pct/100)
+			var user_all = subtotal + tax
+			user_frame.children(".bill-item").children(".order-price").text(currencySymbol + user_total[order['lid']]);
+			user_frame.children(".bill-item").children(".service-charge").text(currencySymbol + service_charge);
+			user_frame.children(".bill-item").children(".subtotal").text(currencySymbol + subtotal);
+			user_frame.children(".bill-item").children(".tax").text(currencySymbol + tax);
+			user_frame.children(".bill-item").children(".price").text(currencySymbol + user_all);
+		});
+		return bill_holder;
+	}
+
+	function dismiss_sidebar() {
+		$('#admin_sidebar').hide();
+		$('body').unbind('click', dismiss_sidebar);
+	}
+	function get_header() {
+		header = $('<div>').css('display', 'flex').css('flex-direction', 'row').css('margin-bottom', '0px');
+		header.append(
+			$('<div>').css('flex', '0 0 25%').css('margin', '2 auto').css('display', 'flex').append(
+				control_panel_btn = $('<button>').css('width', '36px').css('border-style', 'none').css('background-color', '#f8f8f8')
+				.append(
+					$('<svg viewBox="0 0 20 20"><path d="M19 3H.8v2h19v-2zM19 8H.8v2h19v-2zM19 13H.8v2h19v-2z"></svg>').css('flex', 'none').attr('xmlns', 'http://www.w3.org/2000/svg')
+					)
+				)
+			);
+		control_panel_btn.click(function(e) {
+			$('#admin_sidebar').show();
+			$('body').bind('click', dismiss_sidebar);
+			e.stopPropagation();
+		});
+		header.append($('<div>').css('flex', '0 0 50%').css('margin', '2 auto').css('font-size', '18px').css('padding', '12 0').append("Powered by LYNKED"));
+		header.append($('<div>').css('flex', '0 0 25%').css('margin', '2 auto'));
+		return header;
+	}
+	function get_sidebar() {
+		sidebar = $('<div>').attr('id', 'admin_sidebar').addClass('sidebar');
+		sidebar.append($('<div>').text(words['a_s_back']).click(function() { dismiss_sidebar(); }));
+		sidebar.append($('<div>').text(words['a_s_fcontrol']).click(function(){ handle_admin_food(); }));
+		sidebar.append($('<div>').text(words['a_s_lineups']).click(function(){ handle_admin_lineup(); }));
+		sidebar.append($('<div>').text(words['a_s_orders']).click(function(){ handle_admin_order(); }));
+		sidebar.append($('<div>').text(words['a_s_bill']).click(function(){ handle_admin_bill(); }));
+		sidebar.hide();
+		sidebar.click(function(e) { e.stopPropagation(); });
+		return sidebar;
+	}
+
+	function handle_admin_header() {
+		$('header').append(get_header()).append(get_sidebar());
+		$('header').append(notificationElement = $('<div></div>').addClass('notification').hide());
+	}
+
+	function get_top_element() {
+		topElement = $('<div>').addClass('food-top');
+		topElement.append($head = $('<div>').append(
+			closeButton = $('<button id="close">')
+			.attr('aria-label', 'close')
+			.css('display', 'flex')
+			.css('position', 'absolute')
+			.css('padding', 0)
+			.css('width', '48px')
+			.css('height', '48px')
+			.css('left', '8px')
+			.css('top', '8px')
+			.css('background', '#FFFFFF')
+			.css('border-radius', '50%')
+			.css('border-width', 0)
+			.css('align-items', 'center')
+			.css('justify-content', 'center')
+			.append($('<div>')
+				.css('width', '24px')
+				.css('height', '24px')
+				.append(
+					$svg = $('<svg viewBox="0 0 24 24"><path d="m19.5831 6.24931-1.8333-1.83329-5.75 5.83328-5.75-5.83328-1.8333 1.83329 5.8333 5.74999-5.8333 5.75 1.8333 1.8333 5.75-5.8333 5.75 5.8333 1.8333-1.8333-5.8333-5.75z" fill="#000000"></svg>')
+					.css('width', '24px')
+					.css('height', '24px')
+					.css('fill', 'none')
+					.css('overflow', 'hidden')
+					.attr('width', '24px')
+					.attr('height', '24px')
+					.attr('fill', 'none')
+					.attr('xmlns', 'http://www.w3.org/2000/svg')
+					.attr('role', 'presentation')
+					.attr('aria-hidden', 'true')
+					.attr('focusable', 'false')
+					)
+				)
+			)
+		);
+		closeButton.click(function() {
+			topElement.remove();
+			window.history.pushState(null, "", ".");
+		})
+		return topElement;
+	}
+
+	function get_admin_food() {
+		admin_food = $('<div>').attr('id', 'admin_food')
+		admin_food.append(get_food_config())
+		admin_food.append(get_food_detail())
+		if(null == cats) admin_food.hide();
+		return admin_food
+	}
+
+	function get_food_create_warning() {
+		food_warning = $('<div>').text(words['a_f_warning']).attr('id', 'admin_food_warning')
+			.css('text-align', 'center').css('color', '#FF0000').css('margin', '10px')
+		return food_warning
+	}
+
+	function get_category_config() {
+		food_config = $('<div>').text(words['a_f_category_config']).css('text-align', 'center').css('background-color', '#2894FF').css('margin', '10px')
+		.click(function() { $('#category_config').slideToggle("normal"); })
+		return food_config
+	}
+	function get_food_config() {
+		food_config = $('<div>').text(words['a_f_food_config']).css('text-align', 'center').css('background-color', '#2894FF').css('margin', '10px')
+		.click(function() { $('#food_config').slideToggle("normal"); })
+		return food_config
+	}
+	function get_create_button(type, text_str) {
+		create_button = $('<div>').text(text_str)
+		.css('text-align', 'center').css('border-radius', '4px').css('margin', '10px 20%').css('background-color', '#f08080')
+		.bind('click', {set_name: words['a_f_create'], type: type}, show_input)
+		return create_button
+	}
+	function get_category_detail() {
+		category_detail = $('<div>').attr('id', 'category_config')
+		if(null != cats) category_detail.hide();
+		category_detail.append(get_create_button('category', words['a_f_create_category']))
+		category_detail.append(get_admin_category_table())
+		return category_detail
+	}
+	function get_food_detail() {
+		food_detail = $('<div>').attr('id', 'food_config')
+		food_detail.append(get_create_button('food', words['a_f_create_food']))
+		food_detail.append(get_food_category_search())
+		food_detail.append(get_admin_food_table())
+		return food_detail
+	}
+
+	function handle_admin_food() {
+		main = $('main');
+		main.empty();
+		admin_cleanup();
+		main.append(get_category_config())
+		main.append(get_category_detail())
+		if(null == cats) main.append(get_food_create_warning())
+		main.append(get_admin_food())
+		window.history.pushState(null, "", ".")
+	}
+
+	function handle_admin_lineup() {
+		$.get('', {query: 'lineup'})
+		.done(function(data) {
+			main = $('main');
+			main.empty();
+			admin_cleanup();
+			lineups = data;
+			main.append(get_admin_lineup());
+			window.history.pushState(null, "", "?home=lineup")
+		});
+	}
+
+	function handle_admin_order() {
+		$.get('', {query: 'order'})
+		.done(function(data) {
+			main = $('main');
+			main.empty();
+			admin_cleanup();
+			lineups = data.lineups;
+			orders_now = orders = data.orders;
+			foods = data.foods;
+			main.append(get_order_table_search("order"));
+			main.append(get_admin_order());
+			update_pending_time();
+			window.history.pushState(null, "", "?home=order")
+		});
+	}
+
+	function handle_admin_bill() {
+		$.get('', {query: 'bill'})
+		.done(function(data) {
+			main = $('main');
+			main.empty();
+			admin_cleanup();
+			lineups = data.lineups;
+			orders_now = orders = data.orders;
+			foods = data.foods;
+			service_pct = data.service_pct;
+			main.append(get_order_table_search("bill"));
+			main.append(get_admin_bill());
+			window.history.pushState(null, "", "?home=bill")
+		});
+	}
+
+	function admin_cleanup() {
+		if(orderInterval) clearInterval(orderInterval);
+		dismiss_sidebar();
+	}
+
+	function admin_initialize() {
+		if($(window).width() > 768)
+			$("#root").css('width', 768);
+		handle_admin_header();
+		if (home == "lineup")
+			handle_admin_lineup();
+		else if (home == "bill")
+			handle_admin_bill();
+		else if (home == "order")
+			handle_admin_order();
+		else
+			handle_admin_food();
+	}
+
+	$(document).ready(function(){
+		admin_initialize();
+	});
+	</script>
+</head>
+<body>
+	<div id="root" class="root">
+		<header><div style="display: flex; flex-direction: row; margin-bottom: 0px;"><div style="flex: 0 0 25%; margin: 2px auto; display: flex;"><button style="width: 36px; border-style: none; background-color: rgb(248, 248, 248);"><svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;"><path d="M19 3H.8v2h19v-2zM19 8H.8v2h19v-2zM19 13H.8v2h19v-2z"></path></svg></button></div><div style="flex: 0 0 50%; margin: 2px auto; font-size: 18px; padding: 12px 0px;">Powered by LYNKED</div><div style="flex: 0 0 25%; margin: 2px auto;"></div></div><div id="admin_sidebar" class="sidebar" style=""><div>戻る</div><div>メニュー管理</div><div>席の予約管理</div><div>オーダー管理</div><div>会計管理</div></div><div class="notification" style="display: none;"></div></header>
+		<main><div style="text-align: center; background-color: rgb(40, 148, 255); margin: 10px;">Category Configuration</div><div id="category_config" style="display: none;"><div style="text-align: center; border-radius: 4px; margin: 10px 20%; background-color: rgb(240, 128, 128);">Create New Category</div><table id="category_table" class="table_search"><tr><td>焼き鳥</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>サイドメニュー</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>ドリンク</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>定番メニュー</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>人気物</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>丼</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>お子様メニュー</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>カツ丼</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>麺類2</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>ピザ</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>Testing</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>カテゴリー新しい</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>EditNew</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>Testting@¥</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>Ptt</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>qqa</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>変更</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>a</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>new category</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>louis category</td><td><input class="edit_food" type="button" value="編集"></td></tr><tr><td>tkっh、skdm</td><td><input class="edit_food" type="button" value="編集"></td></tr></table></div><div id="admin_food"><div style="text-align: center; background-color: rgb(40, 148, 255); margin: 10px;">Food Configuration</div><div id="food_config"><div style="text-align: center; border-radius: 4px; margin: 10px 20%; background-color: rgb(240, 128, 128);">Create New Food</div><div style="width: 100%;"><input placeholder="カテゴリーの検索" style="width: 90%; margin-left: 5%;"></div><table id="food_table" class="table_search">				<tr><td class="rtd" colspan="3">焼き鳥</td></tr><tr><td></td><td class="rtd">もも</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">むねね</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">かわ</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">やきうどん</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">つくね</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">サイドメニュー</td></tr><tr><td></td><td class="rtd">唐揚げ</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">エイヒレ</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">たまご</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">とうもろこし</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">もも</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">ドリンク</td></tr><tr><td></td><td class="rtd">ハイボール</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">レモンサワー</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">コーラ1</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">ジンジャーエール</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">オレンジジュース1</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">もも</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">定番メニュー</td></tr><tr><td></td><td class="rtd">チャーハン</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">人気物</td></tr><tr><td></td><td class="rtd">やきそば</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">チャーハン</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">お子様メニュー</td></tr><tr><td></td><td class="rtd">test</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">カツ丼</td></tr><tr><td></td><td class="rtd">豚</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">麺類2</td></tr><tr><td></td><td class="rtd">焼きそば3</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">ピザ</td></tr><tr><td></td><td class="rtd">マーガレット222’e</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">Ress</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr><tr><td></td><td class="rtd">ppppvgbn</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">Testing</td></tr><tr><td></td><td class="rtd">Kt,tm</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">Ptt</td></tr><tr><td></td><td class="rtd">Jak</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr>				<tr><td class="rtd" colspan="3">louis category</td></tr><tr><td></td><td class="rtd">louis food</td><td><input class="edit_food" type="button" value="編集"><input class="delete_food" type="button" value="削除"></td></tr></table></div></div></main>
+	</div>
+
+
+</body></html>

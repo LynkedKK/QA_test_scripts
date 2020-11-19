@@ -1,4 +1,4 @@
-# QA_test_scripts
+# LYNKED_QA_project
 repo to host test scripts
 
 ## directory structure
