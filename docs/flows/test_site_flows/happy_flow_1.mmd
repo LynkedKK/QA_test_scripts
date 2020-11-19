@@ -1,0 +1,10 @@
+graph TD
+  A(customer scan QR code) -->|Landing to food selection page|B(index page without 番號)
+  B --> F1(e.g. 焼き鳥)
+  F1 -->|click food photo|C(food detail photo appears)
+  C-->|click add|B1(index page with 番號)
+  B1-->|カート|D(show the item selected)
+  D-->|注文|E(Please wait for a while until the seat is confirmed)
+  E-->|click OK|B1
+  B1-->|click 番號|G(情報更新)
+  G-->|click 情報更新|B1

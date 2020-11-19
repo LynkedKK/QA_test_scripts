@@ -1,0 +1,7 @@
+%% ユーザー流れ - 3 (メユー閲覧)
+%% User flow -3 (viewing Mayu), slide5
+
+graph TD
+  A1(main page with 番號 only) --> B(in admin panel, booking 未確定, red)
+  B-->|restaurant click red button, assign table number|D(booking change green)
+  D-->|user refresh main page|E

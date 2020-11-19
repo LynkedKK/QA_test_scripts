@@ -1,0 +1,10 @@
+%% レストランユーザー流れ - 3 (席の管理), slide 23
+%% Restaurant user flow-3 (seat management)
+
+graph TD
+  A1(client request to reseve a table) --> B(reserve request shown in '席の管理', red 未確定)
+  B-->|restaurant client, click '未確定, red'|C(table number input appears)
+  C-->|restaurant assign table number|D(red -> green)
+  D-->E(seat is assigned prompt appears)
+  E-->|user tap OK on prompt|F(prompt close)
+  F-->G(table number appears on upper right green box)

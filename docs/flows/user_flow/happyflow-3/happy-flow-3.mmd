@@ -1,0 +1,8 @@
+%% ユーザー流れ - 2 (情報更新)
+
+graph TD
+  A1(main page show with 番號) --> |user click 番號 on main page|B2(booking dialogue show, user data)
+  B2 --> |user update reservation detail|C(reservation detail updated, new data)
+  C --> |user click 情報更新|L(情報更新 dialogue appear)
+  L --> |user click ok in 情報更新 dialogue|M(情報更新 dialogue hide)
+  M --> N(main page show with user updated 番號)

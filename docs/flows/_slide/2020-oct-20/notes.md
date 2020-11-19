@@ -1,0 +1,41 @@
+# UI design slide
+
+  - slide1, skip
+  - slide2, skip
+  - slide3, happy-flow-1
+  - slide4, low priority
+  - slide5,
+  - slide6
+  - slide7, happy-flow-5
+  - slide8, happy-flow-6
+  - slide9, happy-flow-7
+  - slide10, happy-flow-8
+  - slide11, happy-flow-9
+  - slide12, happy-flow-10
+  - slide13, it is a improvement, skipping
+  - slide14, it is a improvement, skipping
+  - slide15, it is a improvement, skipping
+  - slide16, it is a improvement, skipping
+  - slide17, it is a improvement, skipping
+  - slide18, it is a improvement, skipping
+  - slide19, skip
+  - slide20, skip
+  - slide21, happy-flow-11
+  - slide22, happy-flow-12
+  - slide23
+  - slide24, still a draft
+  - slide25, restaurant flow, happy-flow-3
+  - slide26, restaurant flow, happy-flow-4
+  - slide27
+  - slide28
+  - slide29
+  - slide30
+  - slide31
+  - slide32, restaurant flow, happy-flow-5
+  - slide33
+  - slide34
+  - slide35
+  - slide36, skip
+  - slide37, skip
+  - slide38
+  - slide39

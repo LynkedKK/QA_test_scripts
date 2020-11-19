@@ -1,0 +1,8 @@
+%% レストランユーザー流れ - 4 (オーダー管理)(商品の提供), slide 24, still draft
+%% Restaurant user flow-4 (order management) (product provision)
+
+graph TD
+  A1(user landing to managment page) --> |user tap on 'オーダー管理'|B('オーダー管理' page appears with outstanding items, pink)
+  B-->|user tap on pink items '1,all' appears|C(table number input appears)
+  C-->|click 1 |D(remaining item increase by 1, turn grey)
+  C-->|click all|E(remaining item disappear)

@@ -1,0 +1,8 @@
+%% ユーザー流れ - 1 (利用規約/ランディングページ), slide 3
+%% User Flow-1 (Terms of Service / Landing Page)
+
+graph TD
+  A(customer first time landing) --> B(Terms and conditions dialogue appear 利用規約)
+  B --> |click 利用規約|C(利用規約 detail appear)
+  C --> |click close 戾X|B
+  B --> |click 同意|D(利用規約 hide, main page show)

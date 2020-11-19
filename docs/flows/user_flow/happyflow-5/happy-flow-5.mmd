@@ -1,0 +1,8 @@
+%% ユーザー流れ - 4 (商品の選び)(席案内まだ済んでいない場合), slide 7
+%% User flow -4 (Product selection) (If seat information has not been completed yet)
+
+graph TD
+  A1(main page with 番號 only, no total amount) --> |user click food item|B(food detail page shown)
+  B-->|user click upper left corner to close|A1
+  A1-->|user click 力一xxxxxxx|C(追加 popup shown)
+  C-->D(total amount shown in bottom)

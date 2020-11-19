@@ -1,0 +1,23 @@
+%% ユーザー流れ - 2 (席の予約)
+
+graph TD
+  A(main page show) --> B(click make new booking/reservation)
+  B --> B1(booking dialogue shown, default data)
+  B1 --> |update 大人|C(大人 count updated)
+  B1 --> |update 子供|D(子供 count updated)
+
+  B1 --> |update 名前|E(名前 count updated)
+  B1 --> |update 備考|F(備考 count updated)
+
+  C --> G
+  D --> G
+  E --> G
+  F --> G
+  G(user done appointment page update)
+  G --> |上記|H(user confirm appointment detail)
+  H --> |if 名前 empty|G
+
+  G --> |appointment detail valid|I(booking dialogue hide)
+  I --> J(番號 XX 番 dialogue shown)
+  J --> |click OK|K(番號 XX 番 dialogue hide)
+  K --> A1(main page show with 番號)

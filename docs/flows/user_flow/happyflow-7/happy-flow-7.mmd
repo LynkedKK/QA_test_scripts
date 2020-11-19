@@ -1,0 +1,9 @@
+%% ユーザー流れ - 5 (カートの確認)(席案内まだ済んでいない場合), slide 9
+%% User flow -5 (Check cart) (If seat information has not been completed yet)
+
+graph TD
+  A1(main page with 番號 only) --> |user click bottom red bar|B(ordered food list shown)
+  B-->|user change item number|C(Quantity updated)
+  C-->|user click 注文|D(席確定 dialogue shown )
+  D-->|user click ok|A2(main page with 番號 only, list total amount updated)
+  C-->|user click upper left close button|A2

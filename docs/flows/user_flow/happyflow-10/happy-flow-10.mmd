@@ -1,0 +1,13 @@
+%% ユーザー流れ - 6 (注文確認/会計)(注文がある場合), slide 12
+%% User flow-6 (order confirmation / accounting) (if there is an order)
+
+graph TD
+  A1(main page with 番號 and table number) --> |restaurant side tap upper left hamburger button|B(restaurant side, orange submenu shown)
+  B-->|user click account managment|C(resturant side, order list shown)
+  C-->|restaurant update food item status '1 or all'|D(restaurant side, food item list updated)
+  D-->E(client side, tap on green button, show bill 'food item, 準備中, red')
+  E-->|tick bill dividing|F(bill dividing checkbox ticked, 1人分)
+  F-->G(total amount equal total price divided by 1)
+  G-->|user select number of people|H(total price divided by num of people)
+  H-->|user tap upper left cross|I(billing dialogue closed)
+  I-->J(main menu shown, with 番號 and table number)
