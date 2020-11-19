@@ -9,7 +9,7 @@ set -ex
 
 # trap shutdown SIGTERM SIGINT EXIT
 
-# ./scripts/clear_report_directory.sh
+./scripts/clear_report_directory.sh
 
 mkdir -p reports/functional/test_viewport/food
 mkdir -p reports/functional/test_viewport/manage
