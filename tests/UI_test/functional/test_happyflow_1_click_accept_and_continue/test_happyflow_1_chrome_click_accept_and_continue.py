@@ -36,7 +36,9 @@ FOOD_PAGE='http://menymeny.com/food/%E3%82%84%E3%81%8D%E3%81%A8%E3%82%8A/'
 ACTUAL_SCREENSHOT='reports/UI_test/functional/test_happyflow_1_click_accept_and_continue/test_happyflow_1_chrome_first_time_landing_after_click_accept_iphonex.png'
 EXPECTED_SCREENSHOT='tests/UI_test/functional/test_happyflow_1_click_accept_and_continue/expected_result/test_happyflow_1_chrome_first_time_landing_after_click_accept_iphonex.png'
 
-def test_happyflow_1_chrome_click_accept_and_continue():
+def test_happyflow_1_chrome_click_accept_and_continue(json_metadata):
+  json_metadata['TEST_ID'] = 'TID_003'
+
   selenium_url = 'http://{}:4444/wd/hub'.format(SELENIUM_HUB_HOST)
 
   chrome_options = webdriver.ChromeOptions()

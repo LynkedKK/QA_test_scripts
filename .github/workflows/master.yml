@@ -24,6 +24,8 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
+          pipenv sync
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/regression/report.html tests/UI_test/regression
 
@@ -54,6 +56,8 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
+
+          pipenv sync
           pipenv install pytest pytest-html
           pipenv run pytest --html=reports/new_feature/report.html tests/UI_test/new_feature
 
@@ -96,8 +100,15 @@ jobs:
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
 
+          mkdir -p ~/.config/gspread
+          cp ./creds/qa-reporting-296203-8b43a1a973e1.json ~/.config/gspread/service_account.json
+
+          pipenv sync
           pipenv install pytest pytest-html
-          pipenv run pytest --html=reports/functional/report.html tests/UI_test/functional
+
+          pipenv run pytest --json-report -v  --html=reports/functional/report.html tests/UI_test/functional
+
+          pipenv run python3 ./tests/fill_value_to_google.py
 
           ls -l reports/functional/test_viewport
           ls -l reports/UI_test/functional

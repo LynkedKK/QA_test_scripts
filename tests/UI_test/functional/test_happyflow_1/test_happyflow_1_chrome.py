@@ -38,7 +38,9 @@ IMAGE_TEST_THRESHOLD=0.05
 width=375
 height=812
 
-def test_happyflow_1_chrome():
+def test_happyflow_1_chrome(json_metadata):
+  json_metadata['TEST_ID'] = 'TID_001'
+
   selenium_url = 'http://{}:4444/wd/hub'.format(SELENIUM_HUB_HOST)
 
   chrome_options = webdriver.ChromeOptions()
