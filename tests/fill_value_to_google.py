@@ -8,13 +8,13 @@ from time import sleep
 import pytz
 
 TXT_RESULT_NOT_FOUND='ASK LOUIS'
-SHEET_TO_FILL="[result] E-Order Smoke Test Plan"
 REPORT_JSON_FILEPATH='./.report.json'
-
+WORKBOOK_TO_FILL="[result] E-Order Smoke Test Plan"
+SHEET_TO_FILL='Test Case'
 
 gc = gspread.service_account()
 
-sh = gc.open(SHEET_TO_FILL)
+sh = gc.open(WORKBOOK_TO_FILL)
 
 in_json = ''.join(open(REPORT_JSON_FILEPATH,'r').readlines())
 raw_result_json = json.loads(in_json)
