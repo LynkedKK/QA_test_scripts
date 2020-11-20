@@ -1,7 +1,7 @@
 name: master_build
 on:
   push:
-    branches:
+    branches-ignore:
       - master
 
 jobs:
@@ -110,6 +110,7 @@ jobs:
 
           pipenv run pytest --json-report -v  --html=reports/functional/report.html tests/UI_test/functional
 
+          # should be no reporting on develop branch
           pipenv run python3 ./tests/fill_value_to_google.py
 
           ls -l reports/functional/test_viewport
