@@ -40,7 +40,6 @@ $ pipenv install --dev
     - https://drive.google.com/drive/folders/16rzqmaSZPB4Lf90ud5Rtp7kY9haVs_Cb?usp=sharing
 
 ### test network
-![](https://raw.githubusercontent.com/LynkedKK/QA_test_scripts/master/tests/UI_test/functional/test_local_chrome/test_network.png?token=AAKP6XMFQS7XLZJ7H7TU6CK7XTD7I)
 ![test network/distribution](/tests/UI_test/functional/test_local_chrome/test_network.png?raw=true "test network/distribution")
 
 
