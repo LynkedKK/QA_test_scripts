@@ -1,0 +1,104 @@
+graph TD
+  subgraph first time landing
+    1--At line up page,<br/> click on T&C text-->2
+    2--click 同意して<br/> button-->3
+  end
+    1(TID_001, <br/>The device should auto redirect to line up page)
+    2(TID_002, <br/>The device should auto redirect to T&C page)
+    3(TID_003, <br/>T&C dialog message should close)
+
+    6(TID_006, <br/>User should automatically direct to food menu page with a number display dialog)
+    3--At line up page, fill in the name, amount of people, notes<br>Take a number 上記 xxx-->6
+
+  subgraph food menu
+
+
+  end
+
+  subgraph restaurant manage
+    26
+    28
+    33
+    30
+    29
+
+  end
+
+  subgraph add into cart
+    12
+    22
+    13
+    14
+    15
+    16
+    23
+  end
+
+  subgraph billing 'customer'
+    25
+  end
+
+  3_1-->4(TID_004, <br/>display food menu page)
+  1-->3_1
+  3_1-->5(TID_005, <br/>display lineup page)
+  6-->6_1(TID_006_1, <br/>assign table<br/> by stub)
+  6--On food menu page, click the number at top right screen<br/>Update the name, people, note<br/>Update my info<br/>Close the info page, check the number at top right screen again<br/>-->8(TID_008, <br/>The user info<br/> should be updated)
+  6--At food menu page, click any of the food-->9(TID_009, <br/>It should direct to<br/> item add page)
+  9-->10(TID_010, <br/>increase the quantity<br/> of the food item)
+  10-->11(TID_011, <br/>reduce the quantity<br/> of the food item)
+  6_1-->12
+  10-->12(TID_012, <br/>add into cart)
+  12-->13(TID_013, <br/>It should open up cart page <br/>with all foods that user ordered)
+  12-->14(TID_014, <br/>It should increase the <br/>quantity of the food item)
+  14-->15(TID_015, <br/>It should reduce the <br/>quantity of the food item)
+  13-->16(TID_016, <br/>It should remove the food<br/> from cart successfully)
+  16-->17(TID_017, <br/>place food order)
+  17-->19(TID_019, <br/>Order should not be sent <br/>successfully with dialog message<br/> '席を確保するまで少々お待ちください')
+  17-->21(TID_021, <br/>It should display all Preparing & Delivered<br/> orders that user had sent)
+  12-->22(TID_022, <br/>It should only<br/> display 4 orders)
+  22-->23(TID_023, <br/>It should display text<br/> box for amount of people input)
+  23-->25(TID_025, <br/>It should display the amount<br/> of bill divided by 2 people)
+
+  26(TID_026, <br/>manage start)-->27(TID_027)
+  26-->28(TID_28, <br/>navigate to manage page)
+  28-->29(TID_29, <br/>goto direct to user line up<br/> page successfully 'line up')
+  28-->30(TID_30, <br/>goto direct to food control<br/> page successfully 'food control')
+  28-->31(TID_31, <br/>goto direct to orders page<br/> successfully 'order page')
+  28-->32(TID_32, <br/>goto direct to billing page<br/> successfully 'bill page')
+  28-->33(TID_33, <br/>back default landing)
+  29-->34(TID_34, <br/>It should display all the<br/> users that performed line up)
+  6-->34
+  34-->35(TID_35, <br/>It should prompt table input)
+  35-->36(TID_36, <br/>assign table)
+  36-->37(TID_37, <br/>make order after<br/> assigned table)
+  9-. check .->37
+  12-. check .->37
+  17-. check .->37
+  31-. check .->37
+  37-->38(TID_38, <br/>check single<br/> quantity order)
+  37-->44(TID_44, <br/>long press to<br/> show cancel button)
+
+  36-->39(TID_39, <br/>make order more than<br/> 1, after assigned table)
+  9-. check .->39
+  12-. check .->39
+  17-. check .->39
+  31-. check .->39
+  39-->40(TID_40, <br/>check more than<br/> 1 quantity order)
+
+  40-->41(TID_41, <br/>tap 1)
+  40-->42(TID_42, <br/>tap all, resulting<br/> no outstanding order)
+  41-->43(TID_43, <br/>tap the rest, resulting<br/> no outstanding order)
+
+
+  39-->45(TID_45, <br/>long press to<br/> show cancel button)
+
+  45-->46(TID_46, <br/>delete item)
+
+  39-->47(TID_47, <br/>check bill)
+  32-. check .->47
+  46-->48(TID_48, <br/>check bill)
+  32-. check .->48
+
+  47-->49(TID_49, <br/>完了 order => OK)
+
+  49-->50
