@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../lib/steps"
+		},
+		{
+			"path": "../../../lib/pages"
+		},
+		{
+			"path": "../../../lib/stubs"
+		},
+		{
+			"path": "../../../../page_dump"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "page_dump"
+	}
+}

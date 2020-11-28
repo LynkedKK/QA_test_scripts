@@ -1,76 +1,8 @@
 name: master_build
 on:
   push:
-    branches:
-      - master
 
 jobs:
-  UI_test_regression:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-
-      - name: run test
-        env: # Or as an environment variable
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-
-        run: |
-          sudo apt update
-          sudo apt install -y python3 python3-pip python3-dev python3-wheel python3-setuptools
-          python3 -V
-          python3 -m pip install pipenv
-
-          export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
-          export PATH="$PATH:$PYTHON_BIN_PATH"
-
-          export LC_ALL=C.UTF-8
-          export LANG=C.UTF-8
-
-          pipenv sync
-          pipenv install pytest pytest-html
-          pipenv run pytest --html=reports/regression/report.html tests/UI_test/regression
-
-      - name: action-upload-artifact-tryout
-        uses: actions/upload-artifact@v2
-        with:
-          name: 'reports_regression'
-          path: reports/regression
-
-  UI_test_new_feature:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-
-      - name: run test
-        env: # Or as an environment variable
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-
-        run: |
-          sudo apt update
-          sudo apt install -y python3 python3-pip python3-dev python3-wheel python3-setuptools
-          python3 -V
-          python3 -m pip install pipenv
-
-          export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
-          export PATH="$PATH:$PYTHON_BIN_PATH"
-
-          export LC_ALL=C.UTF-8
-          export LANG=C.UTF-8
-
-          pipenv sync
-          pipenv install pytest pytest-html
-          pipenv run pytest --html=reports/new_feature/report.html tests/UI_test/new_feature
-
-      - name: action-upload-artifact-tryout
-        uses: actions/upload-artifact@v2
-        with:
-          name: 'reports_new_feature'
-          path: reports/new_feature
-
-
-
   UI_test_functional:
     runs-on: ubuntu-20.04
     steps:
@@ -79,7 +11,7 @@ jobs:
 
       - run: |
           cd $GITHUB_WORKSPACE/_ref/docker-selenium
-            docker-compose -f docker-compose-v3.yml up -d
+            docker-compose -f docker-compose-v3.yml up -d  --scale chrome_1=20
             echo 'sleep a while to let docker steady'
             sleep 30
 
@@ -101,19 +33,21 @@ jobs:
 
           export LC_ALL=C.UTF-8
           export LANG=C.UTF-8
-
-          mkdir -p ~/.config/gspread
-          cp ./creds/qa-reporting-296203-8b43a1a973e1.json ~/.config/gspread/service_account.json
-
-          pipenv sync
           pipenv install pytest pytest-html
-
-          pipenv run pytest --json-report -v  --html=reports/functional/report.html tests/UI_test/functional
-
-          pipenv run python3 ./tests/fill_value_to_google.py
+          pipenv run pytest \
+            --workers 1 \
+            --maxfail=999 \
+            --json-report \
+            --html=reports/functional/report.html \
+            -x tests/UI_test/functional/smoke_test_remote_parallel
 
           ls -l reports/functional/test_viewport
-          ls -l reports/UI_test/functional
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: failed-screen-shot
+          path: tests/UI_test/functional/smoke_test_remote_parallel/actual
 
       - name: action-upload-artifact-tryout
         uses: actions/upload-artifact@v2
@@ -121,8 +55,10 @@ jobs:
           name: 'reports_functional'
           path: reports/functional
 
-      - name: action-upload-artifact-tryout
-        uses: actions/upload-artifact@v2
+      - name: Google Chat Notification
+        uses: Co-qn/google-chat-notification@releases/v1
         with:
-          name: 'reports_UI_test_functional'
-          path: reports/UI_test/functional
+          name: Build
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: ${{ job.status }}
+        if: always()
