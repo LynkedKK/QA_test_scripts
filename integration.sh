@@ -17,7 +17,7 @@ pipenv run pytest \
   --workers 10 \
   --maxfail=999 \
   --json-report  \
-  --html=reports/functional/report.html \
+  --html=reports/functional/index.html \
   -x tests/UI_test/functional/smoke_test_remote_parallel
 
 
