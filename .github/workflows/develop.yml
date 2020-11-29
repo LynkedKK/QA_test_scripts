@@ -50,7 +50,7 @@ jobs:
             --maxfail=999 \
             --json-report \
             --html=reports/functional/develop.html \
-            -x tests/UI_test/functional/smoke_test_remote_parallel
+            -x tests/UI_test/functional/smoke_test_remote_parallel/test_TID_043.py
 
           ls -l reports/functional/test_viewport
 
