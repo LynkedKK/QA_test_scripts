@@ -11,11 +11,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: wait for other tasks complete
-        uses: softprops/turnstyle@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - run: |
           cd $GITHUB_WORKSPACE/_ref/docker-selenium
             docker-compose -f docker-compose-v3.yml up -d  --scale chrome_1=20
@@ -24,6 +19,11 @@ jobs:
 
             docker-compose -f docker-compose-v3.yml ps
           cd $GITHUB_WORKSPACE
+
+      - name: wait for other tasks complete
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: run test
         env: # Or as an environment variable
