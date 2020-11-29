@@ -1,6 +1,11 @@
 # LYNKED_QA_project
 repo to host test scripts
 
+### build status
+| master | develop | routine |
+|--------|---------|---------|
+|![master_build](https://github.com/LynkedKK/QA_test_scripts/workflows/master_build/badge.svg)|![develop_build](https://github.com/LynkedKK/QA_test_scripts/workflows/develop_build/badge.svg)|![routine_build](https://github.com/LynkedKK/QA_test_scripts/workflows/routine_build/badge.svg)|
+
 ## directory structure
 
 ### tests
