@@ -90,7 +90,7 @@ def setupLocalChrome():
   browser = webdriver.Chrome('drivers/chrome/86/chromedriver', desired_capabilities=caps)
   return browser
 
-def test_happyflow_1_chrome_first_time_arrive_line_up_page(json_metadata):
+def test_TID_021(json_metadata):
 
   browser = setupRemoteChrome()
 
