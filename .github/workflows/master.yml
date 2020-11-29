@@ -22,7 +22,7 @@ jobs:
             docker-compose -f docker-compose-v3.yml ps
           cd $GITHUB_WORKSPACE
 
-      - name: run test
+      - name: prepare ubuntu
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 
@@ -32,6 +32,16 @@ jobs:
           python3 -V
           python3 -m pip install pipenv
 
+      - name: wait for other tasks complete
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: run test
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+
+        run: |
           export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
           export PATH="$PATH:$PYTHON_BIN_PATH"
 
