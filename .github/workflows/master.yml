@@ -1,6 +1,8 @@
 name: master_build
 on:
   push:
+    branches:
+      - master
 
 jobs:
   UI_test_functional:
