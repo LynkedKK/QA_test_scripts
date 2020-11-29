@@ -75,7 +75,7 @@ jobs:
 
       - name: update result
         env: # Or as an environment variable
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         run: |
-          sh scripts/update_result.sh
+          sh ./scripts/update_result.sh

@@ -3,7 +3,8 @@
 set -ex
 
 TMP_DIR=$(mktemp -d)
-git clone --depth 1 git@github.com:LynkedKK/QA_test_result.git $TMP_DIR
+# git clone --depth 1 git@github.com:LynkedKK/QA_test_result.git $TMP_DIR
+git clone --depth 1 https://$GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git $TMP_DIR
 
 cp -r /home/logic/_workspace/LynkedKK_QA_Offical_repo/reports/functional/ $TMP_DIR
 
