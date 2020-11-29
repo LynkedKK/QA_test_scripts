@@ -9,6 +9,8 @@ reports/**/*.html
 reports/**/*.png
 diff_img.png
 .report.json
+_tickets
+**/actual
 
 # NODE SPECIFIC
 .env

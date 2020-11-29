@@ -35,7 +35,6 @@ jobs:
           export LANG=C.UTF-8
           pipenv install pytest pytest-html
           pipenv run pytest \
-            --workers 1 \
             --maxfail=999 \
             --json-report \
             --html=reports/functional/report.html \
