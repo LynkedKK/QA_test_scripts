@@ -72,3 +72,10 @@ jobs:
           url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: ${{ job.status }}
         if: always()
+
+      - name: update result
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+
+        run: |
+          sh scripts/update_result.sh
