@@ -1,8 +1,7 @@
 name: master_build
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron:  '0 */2 * * *	'
 
 jobs:
   UI_test_functional:
