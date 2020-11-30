@@ -11,6 +11,7 @@ diff_img.png
 .report.json
 _tickets
 **/actual
+**/*.mp4
 
 # NODE SPECIFIC
 .env
