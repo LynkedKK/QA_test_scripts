@@ -54,6 +54,24 @@ jobs:
 
           ls -l reports/functional/test_viewport
 
+      - uses: actions/checkout@v2
+        with:
+          path: "/tmp/result_placeholder"
+
+      - name: run test
+        run: |
+          cp -r reports/functional/ /tmp/result_placeholder
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: louiscklaw
+          author_email: louiscklaw@gmail.com
+          message: "update routine result"
+          cwd: "/tmp/result_placeholder"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
