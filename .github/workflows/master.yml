@@ -35,24 +35,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: run test
-        env: # Or as an environment variable
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+      # - name: run test
+      #   env: # Or as an environment variable
+      #     SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 
-        run: |
-          export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
-          export PATH="$PATH:$PYTHON_BIN_PATH"
+      #   run: |
+      #     export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
+      #     export PATH="$PATH:$PYTHON_BIN_PATH"
 
-          export LC_ALL=C.UTF-8
-          export LANG=C.UTF-8
-          pipenv install pytest pytest-html
-          pipenv run pytest \
-            --maxfail=999 \
-            --json-report \
-            --html=reports/functional/index.html \
-            -x tests/UI_test/functional/smoke_test_remote_parallel
+      #     export LC_ALL=C.UTF-8
+      #     export LANG=C.UTF-8
+      #     pipenv install pytest pytest-html
+      #     pipenv run pytest \
+      #       --maxfail=999 \
+      #       --json-report \
+      #       --html=reports/functional/index.html \
+      #       -x tests/UI_test/functional/smoke_test_remote_parallel
 
-          ls -l reports/functional/test_viewport
+      #     ls -l reports/functional/test_viewport
 
       - name: run test
         env:
