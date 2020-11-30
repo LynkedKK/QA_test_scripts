@@ -20,10 +20,16 @@ repo to host test scripts
 hosted in repo QA_test_result
 website: https://lynkedkk.github.io/QA_test_result/
 
+
 ## to develop
+
+  - functional test
 ```
 $ pipenv install --dev
 ```
+  - device emulation
+    - start a Pixel 4 phone on emulator-5554 (client_device, appium port 4723, 1080x2280)
+    - start a Android Tablet device on emulator-5556 (restaurant_device, appium port 5723, 1536x2048)
 
 ## progress
   - https://docs.google.com/spreadsheets/d/1pVpmrZH03URWWLjfe9bZxA3nfnf4-qFKSklFdKFEB4o/edit#gid=0
