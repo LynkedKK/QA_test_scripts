@@ -54,23 +54,27 @@ jobs:
 
           ls -l reports/functional/test_viewport
 
-      - uses: actions/checkout@v2
-        with:
-          path: "/tmp/result_placeholder"
+      - name: run test
+        env:
+          LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
+
+        run: |
+          git config --global user.email "louiscklaw@gmail.com"
+          git config --global user.name "louiscklaw"
+          git clone https://louiscklaw:$LOUISCKLAW_GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git --branch=master QA_test_result
+
+          echo 2 > QA_test_result/helloworld.txt
+
+          ls -l QA_test_result
+
+          cd QA_test_result
+            git add .
+            git commit -m"update routine result,"
+            git push
 
       - name: run test
         run: |
-          cp -r reports/functional/ /tmp/result_placeholder
-
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v5
-        with:
-          author_name: louiscklaw
-          author_email: louiscklaw@gmail.com
-          message: "update routine result"
-          cwd: "/tmp/result_placeholder"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          cp -r reports/functional/ QA_test_result
 
       - uses: actions/upload-artifact@v2
         if: failure()
