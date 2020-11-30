@@ -1,7 +1,7 @@
 name: routine_build
 on:
   schedule:
-    - cron:  '0 */2 * * *	'
+    - cron:  '0 */1 * * *	'
 
 jobs:
   UI_test_functional:
