@@ -54,7 +54,7 @@ jobs:
 
       #     ls -l reports/functional/test_viewport
 
-      - name: run test
+      - name: update result
         env:
           LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
 
