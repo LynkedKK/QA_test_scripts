@@ -87,13 +87,3 @@ jobs:
           url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: ${{ job.status }}
         if: always()
-
-      - name: update result
-        env: # Or as an environment variable
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        run: |
-          git config --global user.email "louiscklaw@gmail.com"
-          git config --global user.name "louiscklaw"
-
-          sh ./scripts/update_result.sh
