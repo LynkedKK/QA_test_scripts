@@ -5,25 +5,20 @@ repo to host test scripts
 
 ### tests
 ```
-tests
-└── UI_test
-    ├── functional   # store functional test
-    ├── lib          # shared libraries between tests
-    ├── new_feature  # store new_feature test
-    └── regression   # store regression test
+<ROOT>
+└── tests
+    ├── admin                  # test /admin/
+    ├── lang
+    ├── lib
+    ├── manage                 # test /manage/
+    ├── self_test
+    ├── smoke
+    └── UI_test                # test /food/, lineup
 ```
 
 ### reports
-```
-reports
-├── functional         # store result of functional test
-│   ├── assets
-│   └── test_viewport
-├── new_feature        # store result of new_feature test
-│   └── assets
-└── regression         # store result of regression test
-    └── assets
-```
+hosted in repo QA_test_result
+website: https://lynkedkk.github.io/QA_test_result/
 
 ## to develop
 ```
