@@ -1,4 +1,4 @@
-name: routine_build
+name: on_request_build
 on:
   repository_dispatch:
     types: run-smoke
