@@ -18,8 +18,10 @@ jobs:
 
             docker-compose -f docker-compose-v3.yml ps
           cd $GITHUB_WORKSPACE
+        continue-on-error: true
 
       - name: prepare ubuntu
+        continue-on-error: true
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         run: |
@@ -32,8 +34,10 @@ jobs:
         uses: softprops/turnstyle@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
 
       - name: run test
+        continue-on-error: true
         env: # Or as an environment variable
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         run: |
@@ -52,6 +56,7 @@ jobs:
           ls -l reports/functional/test_viewport
 
       - name: update result
+        continue-on-error: true
         env:
           LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
         run: |
@@ -75,6 +80,7 @@ jobs:
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
 
       - name: action-upload-artifact-tryout
+        continue-on-error: true
         uses: actions/upload-artifact@v2
         with:
           name: 'reports_functional'
