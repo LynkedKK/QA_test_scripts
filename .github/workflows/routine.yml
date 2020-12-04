@@ -72,12 +72,15 @@ jobs:
         with:
           name: actual-screen-shot
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
+        if: always()
 
       - name: action-upload-artifact-tryout
         uses: actions/upload-artifact@v2
         with:
           name: 'reports_functional'
           path: reports/functional
+        if: always()
+
 
       - name: Google Chat Notification
         uses: Co-qn/google-chat-notification@releases/v1
