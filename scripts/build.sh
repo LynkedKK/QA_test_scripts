@@ -30,5 +30,6 @@ set -ex
 
 rm -rf /home/logic/_del/LYNKED_QA_project-local-chrome/tests/UI_test/functional/smoke_test_remote_parallel/actual/*.png
 
-# pipenv run pytest --maxfail=999 --json-report  --html=reports/functional/report.html -x tests/UI_test/functional/smoke_test_remote_parallel/test_TID_004.py
-pipenv run pytest --maxfail=999 --json-report  --html=reports/android/index.html -x tests/android/Auto_Reload/Functional/test_TID_050.py
+pipenv sync
+
+pipenv run pytest --maxfail=999 --json-report  --html=reports/functional/report.html -x tests/UI_test/functional/smoke_test_remote_parallel/test_TID_004.py
