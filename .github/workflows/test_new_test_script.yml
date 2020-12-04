@@ -1,0 +1,92 @@
+name: test_new_test_script
+
+on:
+  push:
+    branches:
+      - test/test_new_test_script/**
+
+jobs:
+  UI_test_functional:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - run: |
+          cd $GITHUB_WORKSPACE/_ref/docker-selenium
+            docker-compose -f docker-compose-v3.yml up -d  --scale chrome_1=20
+            echo 'sleep a while to let docker steady'
+            sleep 30
+
+            docker-compose -f docker-compose-v3.yml ps
+          cd $GITHUB_WORKSPACE
+
+      - name: prepare ubuntu
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        run: |
+          sudo apt update
+          sudo apt install -y python3 python3-pip python3-dev python3-wheel python3-setuptools
+          python3 -V
+          python3 -m pip install pipenv
+
+      - name: wait for other tasks complete
+        uses: softprops/turnstyle@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: run test
+        env: # Or as an environment variable
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        run: |
+          export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
+          export PATH="$PATH:$PYTHON_BIN_PATH"
+
+          export LC_ALL=C.UTF-8
+          export LANG=C.UTF-8
+          pipenv install pytest pytest-html
+          pipenv run pytest \
+            --maxfail=999 \
+            --json-report \
+            --html=reports/functional/index.html \
+            -x tests/UI_test/functional/smoke_test_remote_parallel
+
+          ls -l reports/functional/test_viewport
+
+      # note: skip upload result when self-test
+      # - name: update result
+      #   env:
+      #     LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
+      #   run: |
+      #     git config --global user.email "louiscklaw@gmail.com"
+      #     git config --global user.name "louiscklaw"
+      #     git clone https://louiscklaw:$LOUISCKLAW_GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git --branch=master QA_test_result
+
+      #     cp -r reports/functional/*  QA_test_result
+
+      #     ls -l QA_test_result
+
+      #     cd QA_test_result
+      #       git add .
+      #       git commit -m"update routine result,"
+      #       git push
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: failed-screen-shot
+          path: tests/UI_test/functional/smoke_test_remote_parallel/actual
+
+      - name: action-upload-artifact-tryout
+        uses: actions/upload-artifact@v2
+        with:
+          name: 'reports_functional'
+          path: reports/functional
+
+      - name: Google Chat Notification
+        uses: Co-qn/google-chat-notification@releases/v1
+        with:
+          name: Build
+          url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          status: ${{ job.status }}
+        if: always()
