@@ -52,10 +52,28 @@ jobs:
 
           ls -l reports/functional/test_viewport
 
+      # - name: update result
+      #   env:
+      #     LOUISCKLAW_GITHUB_TOKEN: ${{ secrets.LOUISCKLAW_GITHUB_TOKEN }}
+      #   run: |
+      #     git config --global user.email "louiscklaw@gmail.com"
+      #     git config --global user.name "louiscklaw"
+      #     git clone https://louiscklaw:$LOUISCKLAW_GITHUB_TOKEN@github.com/LynkedKK/QA_test_result.git --branch=master QA_test_result
+
+      #     cp -r reports/functional/*  QA_test_result
+
+      #     ls -l QA_test_result
+
+      #     cd QA_test_result
+      #       git add .
+      #       git commit -m"update routine result,"
+      #       git push
+
       - uses: actions/upload-artifact@v2
         with:
           name: actual-screen-shot
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
+        if: always()
 
       - name: action-upload-artifact-tryout
         uses: actions/upload-artifact@v2
