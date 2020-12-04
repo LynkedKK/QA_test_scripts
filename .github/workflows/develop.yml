@@ -1,8 +1,8 @@
 name: develop_build
 on:
   push:
-    branches-ignore:
-      - master
+    branches:
+      - develop
 
 jobs:
   UI_test_functional:
