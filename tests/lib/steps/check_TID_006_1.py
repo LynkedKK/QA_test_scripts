@@ -20,6 +20,6 @@ def run_check(json_metadata, browser, table_username ,sleep_before_confirm_s=20)
   table_assigned_dialogue_po.tapOkButtonOnDialogue()
 
   # NOTE: update threshold due to table number varying
-  assertCheckPoint(browser, 'TID_006_1_2', TEST_ERR_MSG, 0.04)
+  assertCheckPoint(browser, 'TID_006_1_2', TEST_ERR_MSG, 0.05)
 
   json_metadata['TID_006_1'] = 'passed'
