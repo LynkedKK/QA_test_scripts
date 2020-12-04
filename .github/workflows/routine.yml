@@ -69,9 +69,8 @@ jobs:
             git push
 
       - uses: actions/upload-artifact@v2
-        if: failure()
         with:
-          name: failed-screen-shot
+          name: actual-screen-shot
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
 
       - name: action-upload-artifact-tryout
