@@ -19,7 +19,7 @@ def getActualScreenshotPath(test_number):
 def getExpectedScreenshotPath(test_number):
   return 'tests/UI_test/functional/smoke_test_remote_parallel/expected/{}_sc.png'.format(test_number)
 
-def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.054, sleep_s=0.5, make_asserts=True):
+def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.039, sleep_s=0.5, make_asserts=True):
   sleep(sleep_s)
   actual_screenshot_path=getActualScreenshotPath(check_point_name)
   expected_screenshot_path=getExpectedScreenshotPath(check_point_name)
