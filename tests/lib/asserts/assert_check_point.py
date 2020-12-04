@@ -29,4 +29,4 @@ def assertCheckPoint(driver ,check_point_name, error_message, fail_threshold=0.0
   if make_asserts:
     assertSameImage(expected_screenshot_path, actual_screenshot_path,fail_threshold,  error_message)
 
-  os.remove(actual_screenshot_path)
+  # os.remove(actual_screenshot_path)
