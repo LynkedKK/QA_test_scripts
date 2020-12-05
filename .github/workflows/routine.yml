@@ -80,6 +80,7 @@ jobs:
         with:
           name: 'reports_functional'
           path: reports/functional
+          retention-days: 5
         if: always()
 
 
@@ -89,4 +90,5 @@ jobs:
           name: Build
           url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: ${{ job.status }}
+          retention-days: 5
         if: always()

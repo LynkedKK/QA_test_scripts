@@ -73,6 +73,7 @@ jobs:
         with:
           name: actual-screen-shot
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
+          retention-days: 5
         if: always()
 
       - name: action-upload-artifact-tryout
@@ -80,3 +81,5 @@ jobs:
         with:
           name: 'reports_functional'
           path: reports/functional
+          retention-days: 5
+        if: always()
