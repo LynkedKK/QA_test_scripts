@@ -70,17 +70,18 @@ jobs:
             git push
 
       - uses: actions/upload-artifact@v2
+        if: failure()
         with:
           name: actual-screen-shot
           path: tests/UI_test/functional/smoke_test_remote_parallel/actual
-        if: always()
+          retention-days: 5
 
       - name: action-upload-artifact-tryout
         uses: actions/upload-artifact@v2
         with:
           name: 'reports_functional'
           path: reports/functional
-          retention-days: 5
+          retention-days: 14
         if: always()
 
 
@@ -90,5 +91,4 @@ jobs:
           name: Build
           url: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
           status: ${{ job.status }}
-          retention-days: 5
         if: always()
