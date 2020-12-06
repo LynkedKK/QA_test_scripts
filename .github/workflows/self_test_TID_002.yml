@@ -2,7 +2,7 @@ name: self_test_helloworld
 on:
   push:
     branches:
-      - test/self-test/**
+      - test/test_TID_004/helloworld
 
 jobs:
   UI_test_functional:
