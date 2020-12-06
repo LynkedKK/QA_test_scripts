@@ -2,7 +2,7 @@ name: self_test_helloworld
 on:
   push:
     branches:
-      - test/test_TID_004/helloworld
+      - test/test_TID_003_1/helloworld
 
 jobs:
   UI_test_functional:
@@ -43,7 +43,7 @@ jobs:
             --maxfail=999 \
             --json-report \
             --html=reports/functional/index.html \
-            -x tests/UI_test/functional/smoke_test_remote_parallel/test_TID_004.py
+            -x tests/UI_test/functional/smoke_test_remote_parallel/test_TID_003_1.py
 
       - uses: actions/upload-artifact@v2
         with:
