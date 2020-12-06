@@ -16,7 +16,7 @@ repo to host test scripts
 ```
 
 ### Reports
-- hosted in repo 
+- hosted in repo
 - website: https://lynkedkk.github.io/QA_test_result/
 
 
@@ -41,7 +41,7 @@ $ build.sh
 
    2. `$ scripts/appium-restaurant.sh`
 
-      
+
 
 ## Test descriptions:
   - [E-order](https://docs.google.com/spreadsheets/d/18Wcn9MWp2byJXmWZHl3n03LQLLc1-ykaS3x5ogX8T08/edit#gid=1731433447)
@@ -65,7 +65,6 @@ $ build.sh
 
   - http://menymeny.com/manage/やきとり/
     - more mature
-    - `passcode: 999999`
 
 
 ### sources
